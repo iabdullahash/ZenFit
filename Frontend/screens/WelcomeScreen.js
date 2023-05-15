@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import React from "react";
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
@@ -17,13 +18,23 @@ const { height } = Dimensions.get("window");
 
 
 const WelcomeScreen = () => {
+
+  const navigation = useNavigation();
+
   return (
-    <SafeAreaView style={{backgroundColor: Colors.background}}>
+    <SafeAreaView 
+    style={{
+      backgroundColor: Colors.background,
+      flex:1,
+      alignItems:'center',
+      justifyContent:'center'
+      }}>
       <View >   
         <ImageBackground
           style={{
+            
             marginRight: Spacing*1.5,
-            height: height / 2.5,
+            height: 280,
           }}
           resizeMode="contain"
           source={require("../assets/images/logo1.png")}
@@ -67,7 +78,7 @@ const WelcomeScreen = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigate("Login")}
+            onPress={() => navigation.navigate("Login")}
             style={{
               backgroundColor: Colors.primary,
               paddingVertical: Spacing * 1.5,
@@ -80,6 +91,7 @@ const WelcomeScreen = () => {
                 height: Spacing,
               },
               shadowOpacity: 0.3,
+              elevation:1,
               shadowRadius: Spacing,
             }}
           >
@@ -95,7 +107,7 @@ const WelcomeScreen = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigate("Register")}
+            onPress={() => navigation.navigate("Register")}
             style={{
               backgroundColor: Colors.darkText,
               paddingVertical: Spacing * 1.5,

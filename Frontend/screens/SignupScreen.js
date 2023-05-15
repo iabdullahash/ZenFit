@@ -12,7 +12,7 @@ import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
 import Font from "../constants/Fonts";
 import { Ionicons } from "@expo/vector-icons";
-import { Dropdown } from 'react-native-material-dropdown';
+// import { Dropdown } from 'react-native-material-dropdown';
 import AppTextInput from "../components/AppTextInput";
 
 
@@ -78,10 +78,10 @@ const RegisterScreen = () => {
             marginVertical:Spacing,
             width:'50%'
             }} />
-          <Dropdown
+          {/* <Dropdown
             label='Gender'
             data={data}
-          />
+          /> */}
           
         </View>
 

@@ -18,7 +18,13 @@ import AppTextInput from "../components/AppTextInput";
 
 const LoginScreen = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView
+    style={{
+      backgroundColor: Colors.background,
+      flex:1,
+      alignItems:'center',
+      justifyContent:'center'
+      }}>
       <View
         style={{
           padding: Spacing * 2,
