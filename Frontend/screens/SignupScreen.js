@@ -17,29 +17,47 @@ import { Picker } from 'react-native-wheel-pick';
 import AppTextInput from "../components/AppTextInput";
 
 
-const Agescreen = () => {
-  const navigation = useNavigation();
-  const [age, setAge] = useState('18');
+const OnboardingScreen = ({ onNext, age, setAge }) => {
+
+  const handleNext = () => {
+    if (age && age > 0) {
+      onNext();
+    }
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+     style={{
+      backgroundColor: Colors.background,
+      flex:1,
+      alignItems:'center',
+      justifyContent:'center'
+     }}>
       <View style={styles.contentContainer}>
-        <Text style={styles.questionText}>What's your Age?</Text>
-        <RNPickerSelect
+        <Text 
+          style={{
+            fontSize: FontSize.xLarge,
+            color: Colors.primary,
+            fontFamily: Font["poppins-bold"],
+            marginVertical: Spacing * 3,
+            maxWidth:'100%'
+            }}
+            >
+              What is your Age?
+        </Text>
+
+        <AppTextInput
+          placeholder="Age"
+          inputMode="numeric"
           value={age}
-          onValueChange={(value) => setAge(value)}
-          items={[
-            { label: '10', value: '10' },
-            { label: '11', value: '11' },
-            { label: '12', value: '12' },
-            // Add more items as needed
-          ]}
-          style={pickerSelectStyles}
+          maxLength={2}
+          onChangeText={setAge}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Signup')}
-        >
+        <TouchableOpacity 
+          style={[styles.button , age <= 0 && styles.buttonDisabled]} 
+          onPress={handleNext}
+          disabled={age <= 0}
+          >
           <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
       </View>
@@ -47,7 +65,7 @@ const Agescreen = () => {
   );
 };
 
-const SignupScreen = () => {
+const SignupScreen = ({age}) => {
 
   const navigation = useNavigation();
 
@@ -113,7 +131,8 @@ const SignupScreen = () => {
 
         <TouchableOpacity
           style={{
-            padding: Spacing * 2,
+            padding: Spacing*1.5,
+            height:Spacing*6,
             backgroundColor: Colors.primary,
             marginVertical: Spacing * 3,
             borderRadius: Spacing,
@@ -154,145 +173,73 @@ const SignupScreen = () => {
             Already have an account
           </Text>
         </TouchableOpacity>
-
-        {/* <View
-          style={{
-            marginVertical: Spacing * 3,
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: Font["poppins-semiBold"],
-              color: Colors.primary,
-              textAlign: "center",
-              fontSize: FontSize.small,
-            }}
-          >
-            Or continue with
-          </Text>
-
-          <View
-            style={{
-              marginTop: Spacing,
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                padding: Spacing,
-                backgroundColor: Colors.gray,
-                borderRadius: Spacing / 2,
-                marginHorizontal: Spacing,
-              }}
-            >
-              <Ionicons
-                name="logo-google"
-                color={Colors.text}
-                size={Spacing * 2}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                padding: Spacing,
-                backgroundColor: Colors.gray,
-                borderRadius: Spacing / 2,
-                marginHorizontal: Spacing,
-              }}
-            >
-              <Ionicons
-                name="logo-apple"
-                color={Colors.text}
-                size={Spacing * 2}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                padding: Spacing,
-                backgroundColor: Colors.gray,
-                borderRadius: Spacing / 2,
-                marginHorizontal: Spacing,
-              }}
-            >
-              <Ionicons
-                name="logo-facebook"
-                color={Colors.text}
-                size={Spacing * 2}
-              />
-            </TouchableOpacity>
-          </View>
-        </View> */}
       </View>
     </SafeAreaView>
   );
 };
 
+
+
+const App = () => {
+  const [showOnboarding, setShowOnboarding] = useState(true);
+  const [age, setAge] = useState('');
+
+  const handleOnboardingNext = () => {
+    setShowOnboarding(false);
+  };
+
+  return (
+    <>
+      {showOnboarding ? (
+        <OnboardingScreen
+          onNext={handleOnboardingNext}
+          age={age}
+          setAge={setAge}
+        />
+      ) : (
+        <SignupScreen age={age} />
+      )}
+    </>
+  );
+};
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.background,
   },
   contentContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: Spacing * 2,
+    maxWidth:"100%"
   },
-  questionText: {
-    fontSize: FontSize.xLarge,
-    color: Colors.primary,
-    fontFamily: Font['poppins-bold'],
-    marginVertical: Spacing * 3,
-    textAlign: 'center',
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: Spacing * 2,
   },
-  picker: {
-    backgroundColor: 'white',
-    width: 300,
-    height: 215,
-    alignSelf: 'center',
-  },
+
+
   button: {
-    padding: Spacing * 2,
     backgroundColor: Colors.primary,
-    marginVertical: Spacing * 3,
-    borderRadius: Spacing,
-    shadowColor: Colors.primary,
-    shadowOffset: {
-      width: 0,
-      height: Spacing,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: Spacing,
+    paddingVertical: Spacing,
+    paddingHorizontal: Spacing * 3,
+    borderRadius: 8,
   },
   buttonText: {
-    fontFamily: Font['poppins-bold'],
     color: Colors.onPrimary,
-    textAlign: 'center',
-    fontSize: FontSize.large,
+    fontWeight: 'bold',
+    fontSize: 16,
   },
+  buttonDisabled: {
+    opacity: 0.5,
+  }
 });
 
-
-
-// const pickerSelectStyles = StyleSheet.create({
-//   inputIOS: {
-//     fontSize: 16,
-//     paddingVertical: 12,
-//     paddingHorizontal: 10,
-//     borderWidth: 1,
-//     borderColor: 'gray',
-//     borderRadius: 4,
-//     color: 'black',
-//     paddingRight: 30, 
-//   },
-//   inputAndroid: {
-//     fontSize: 16,
-//     paddingHorizontal: 10,
-//     paddingVertical: 8,
-//     borderWidth: 0.5,
-//     borderColor: 'purple',
-//     borderRadius: 8,
-//     color: 'black',
-//     paddingRight: 30,
-// })
-
-export default SignupScreen ;
+export default App;

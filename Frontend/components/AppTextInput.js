@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, TextInputProps, View } from 'react-native';
+import { Dimensions, StyleSheet, TextInput, TextInputProps, View } from 'react-native';
 import Colors from '../constants/Colors';
 import Font from '../constants/Fonts';
 import FontSize from '../constants/FontSize';
-import IconButton from './IconButton';
 import Spacing from '../constants/Spacing';
+import { Ionicons } from '@expo/vector-icons';
+
+const width = Dimensions.get("window").width;
 
 const AppTextInput = ({ inputMode, ...otherProps }) => {
-  const [focused, setFocused] = useState(false);  
+  const [focused, setFocused] = useState(false);
 
   // Determine if the password input should be masked
   const isPasswordInput = inputMode === 'password';
+  let temp = inputMode
+  if (inputMode === "password"){temp = "default"}
   const [isPasswordVisible, setPasswordVisible] = useState(!isPasswordInput);
 
   return (
@@ -25,10 +29,15 @@ const AppTextInput = ({ inputMode, ...otherProps }) => {
         ]}
         secureTextEntry={isPasswordInput && !isPasswordVisible} // Hide the password if inputMode is 'password' and isPasswordVisible is false
         {...otherProps}
+        
+        keyboardType={temp}
       />
       {isPasswordInput && (
-        <IconButton
-          icon={isPasswordVisible ? 'eye-off' : 'eye'}
+        <Ionicons
+          name={isPasswordVisible ? 'eye-off' : 'eye'}
+          size={24}
+          color={Colors.primary}
+          style={styles.icon}
           onPress={() => setPasswordVisible(!isPasswordVisible)}
         />
       )}
@@ -41,6 +50,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   input: {
+    width: width-40,
     height: Spacing * 6,
     fontFamily: Font['poppins-regular'],
     fontSize: FontSize.small,
@@ -56,6 +66,12 @@ const styles = StyleSheet.create({
     shadowColor: Colors.primary,
     shadowOpacity: 0.2,
     shadowRadius: Spacing,
+  },
+  icon: {
+    position: 'absolute',
+    top: '50%',
+    right: Spacing,
+    transform: [{ translateY: -12 }],
   },
 });
 
