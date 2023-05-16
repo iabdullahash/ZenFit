@@ -67,8 +67,8 @@ const LoginScreen = () => {
             
           }}
         >
-          <AppTextInput placeholder="Email" />
-          <AppTextInput placeholder="Password" />
+          <AppTextInput placeholder="Email" inputMode="email-address" />
+          <AppTextInput placeholder="Password" inputMode='password'/>
         </View>
 
         <View>
