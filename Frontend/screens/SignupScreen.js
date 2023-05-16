@@ -6,25 +6,64 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import { React ,useState } from "react";
+import { useNavigation } from '@react-navigation/native';
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
 import Font from "../constants/Fonts";
-import { Ionicons } from "@expo/vector-icons";
+import { Picker } from 'react-native-wheel-pick';
 // import { Dropdown } from 'react-native-material-dropdown';
 import AppTextInput from "../components/AppTextInput";
 
 
+const Agescreen = () => {
+  const navigation = useNavigation();
+  const [age, setAge] = useState('18');
 
-const RegisterScreen = () => {
-  let data = [{
-    value: 'Male',
-  }, {
-    value: 'Female',
-  }];
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.contentContainer}>
+        <Text style={styles.questionText}>What's your Age?</Text>
+        <RNPickerSelect
+          value={age}
+          onValueChange={(value) => setAge(value)}
+          items={[
+            { label: '10', value: '10' },
+            { label: '11', value: '11' },
+            { label: '12', value: '12' },
+            // Add more items as needed
+          ]}
+          style={pickerSelectStyles}
+        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Signup')}
+        >
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+const SignupScreen = () => {
+
+  const navigation = useNavigation();
+
+  // let data = [{
+  //   value: 'Male',
+  // }, {
+  //   value: 'Female',
+  // }];
+  return (
+    <SafeAreaView
+    style={{
+      backgroundColor: Colors.background,
+      flex:1,
+      alignItems:'center',
+      justifyContent:'center'
+      }}>
       <View
         style={{
           padding: Spacing * 2,
@@ -49,11 +88,12 @@ const RegisterScreen = () => {
             style={{
               fontFamily: Font["poppins-regular"],
               fontSize: FontSize.small,
+              color:Colors.text,
               maxWidth: "100%",
               textAlign: "center",
             }}
           >
-            Create an account so you can explore all the existing jobs
+            Create an account so you can explore all the features of our app
           </Text>
         </View>
         <View
@@ -62,22 +102,8 @@ const RegisterScreen = () => {
           }}
         >
           <AppTextInput placeholder="Name" />
-          <AppTextInput placeholder="Email" />
-          <AppTextInput placeholder="Password" />
-          <TextInput 
-          inputMode="decimal"
-          placeholder="Age" 
-          maxLength={2}
-          style={{
-            fontFamily: Font["poppins-regular"],
-            fontSize: FontSize.small,
-            backgroundColor: Colors.lightPrimary,
-            borderRadius:Spacing,
-            height: Spacing*6,
-            padding: Spacing*1.5,
-            marginVertical:Spacing,
-            width:'50%'
-            }} />
+          <AppTextInput placeholder="Email" inputMode="email-address" />
+          <AppTextInput placeholder="Password" inputMode="password" />
           {/* <Dropdown
             label='Gender'
             data={data}
@@ -112,7 +138,7 @@ const RegisterScreen = () => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigate("Login")}
+          onPress={() => navigation.navigate("Login")}
           style={{
             padding: Spacing,
           }}
@@ -129,7 +155,7 @@ const RegisterScreen = () => {
           </Text>
         </TouchableOpacity>
 
-        <View
+        {/* <View
           style={{
             marginVertical: Spacing * 3,
           }}
@@ -195,10 +221,78 @@ const RegisterScreen = () => {
               />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );
 };
 
-export default RegisterScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.background,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  contentContainer: {
+    paddingHorizontal: Spacing * 2,
+  },
+  questionText: {
+    fontSize: FontSize.xLarge,
+    color: Colors.primary,
+    fontFamily: Font['poppins-bold'],
+    marginVertical: Spacing * 3,
+    textAlign: 'center',
+  },
+  picker: {
+    backgroundColor: 'white',
+    width: 300,
+    height: 215,
+    alignSelf: 'center',
+  },
+  button: {
+    padding: Spacing * 2,
+    backgroundColor: Colors.primary,
+    marginVertical: Spacing * 3,
+    borderRadius: Spacing,
+    shadowColor: Colors.primary,
+    shadowOffset: {
+      width: 0,
+      height: Spacing,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: Spacing,
+  },
+  buttonText: {
+    fontFamily: Font['poppins-bold'],
+    color: Colors.onPrimary,
+    textAlign: 'center',
+    fontSize: FontSize.large,
+  },
+});
+
+
+
+// const pickerSelectStyles = StyleSheet.create({
+//   inputIOS: {
+//     fontSize: 16,
+//     paddingVertical: 12,
+//     paddingHorizontal: 10,
+//     borderWidth: 1,
+//     borderColor: 'gray',
+//     borderRadius: 4,
+//     color: 'black',
+//     paddingRight: 30, 
+//   },
+//   inputAndroid: {
+//     fontSize: 16,
+//     paddingHorizontal: 10,
+//     paddingVertical: 8,
+//     borderWidth: 0.5,
+//     borderColor: 'purple',
+//     borderRadius: 8,
+//     color: 'black',
+//     paddingRight: 30,
+// })
+
+export default SignupScreen ;

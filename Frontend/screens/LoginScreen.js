@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import React from "react";
+import { useNavigation } from '@react-navigation/native';
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
@@ -17,6 +18,9 @@ import AppTextInput from "../components/AppTextInput";
 
 
 const LoginScreen = () => {
+
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView
     style={{
@@ -108,7 +112,7 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigate("Register")}
+          onPress={() => navigation.navigate("Signup")}
           style={{
             padding: Spacing,
           }}
@@ -125,7 +129,7 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
 
-        <View
+        {/* <View
           style={{
             marginVertical: Spacing * 3,
           }}
@@ -191,7 +195,7 @@ const LoginScreen = () => {
               />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );

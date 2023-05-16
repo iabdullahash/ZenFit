@@ -107,7 +107,7 @@ const WelcomeScreen = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Register")}
+            onPress={() => navigation.navigate("Signup")}
             style={{
               backgroundColor: Colors.darkText,
               paddingVertical: Spacing * 1.5,
