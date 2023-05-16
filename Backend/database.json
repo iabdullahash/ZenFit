@@ -1,0 +1,117 @@
+{
+  "users": [
+    {
+      "email": "user1@example.com",
+      "password": "password1",
+      "weight": 70,
+      "height": 170,
+      "age": 25,
+      "goals": {
+        "requiredCalories": 2000,
+        "dailyStepsGoal": 10000
+      },
+      "googleAuthKey": "1234567890",
+      "activity": {
+        "stepCount": [5000, 6000, 8000, 9000, 7500, 10000, 12000],
+        "caloriesBurnt": [250, 300, 400, 450, 375, 500, 600]
+      },
+      "meals": [
+        {
+          "food": "Chicken Breast",
+          "calories": 250
+        },
+        {
+          "food": "Salad",
+          "calories": 100
+        }
+      ]
+    },
+    {
+      "email": "user2@example.com",
+      "password": "password2",
+      "weight": 65,
+      "height": 165,
+      "age": 30,
+      "goals": {
+        "requiredCalories": 1800,
+        "dailyStepsGoal": 8000
+      },
+      "googleAuthKey": "0987654321",
+      "activity": [
+        {
+          "date": "2023-05-01",
+          "stepCount": 5000,
+          "caloriesBurnt": 250
+        },
+        {
+          "date": "2023-05-02",
+          "stepCount": 6000,
+          "caloriesBurnt": 300
+        },
+        {
+          "date": "2023-05-03",
+          "stepCount": 8000,
+          "caloriesBurnt": 400
+        }
+      ],
+      "meals": [
+        {
+          "food": "Salmon",
+          "calories": 300
+        },
+        {
+          "food": "Rice",
+          "calories": 150
+        }
+      ]
+    }
+  ],
+  "workoutPlans": [
+    {
+      "title": "Beginner Workout Plan",
+      "description": "A 4-week beginner workout plan for overall fitness.",
+      "workouts": [
+        "Monday: Full-body workout",
+        "Wednesday: Upper body workout",
+        "Friday: Lower body workout"
+      ]
+    },
+    {
+      "title": "Weight Loss Workout Plan",
+      "description": "A 12-week workout plan designed for weight loss.",
+      "workouts": [
+        "Monday: Cardio workout",
+        "Wednesday: Strength training",
+        "Friday: HIIT workout"
+      ]
+    }
+  ],
+  "mealPlans": [
+    {
+      "title": "Vegetarian Meal Plan",
+      "description": "A 7-day vegetarian meal plan for a balanced diet.",
+      "meals": [
+        "Monday: Breakfast - Oatmeal, Lunch - Salad, Dinner - Vegetable Stir-fry",
+        "Tuesday: Breakfast - Smoothie, Lunch - Lentil Soup, Dinner - Stuffed Bell Peppers",
+        "Wednesday: Breakfast - Yogurt with Fruits, Lunch - Quinoa Salad, Dinner - Veggie Burger",
+        "Thursday: Breakfast - Avocado Toast, Lunch - Vegetable Curry, Dinner - Ratatouille",
+        "Friday: Breakfast - Chia Pudding, Lunch - Chickpea Salad, Dinner - Veggie Tacos",
+        "Saturday: Breakfast - Pancakes, Lunch - Greek Salad, Dinner - Vegetable Pasta",
+        "Sunday: Breakfast - Fruit Bowl, Lunch - Veggie Wrap, Dinner - Tofu Stir-fry"
+      ]
+    },
+    {
+      "title": "High Protein Meal Plan",
+      "description": "A 7-day meal plan focused on high-protein foods.",
+      "meals": [
+        "Monday: Breakfast - Scrambled Eggs, Lunch - Grilled Chicken Salad, Dinner - Baked Salmon",
+        "Tuesday: Breakfast - Greek Yogurt, Lunch - Beef Stir-fry, Dinner - Shrimp Skewers",
+        "Wednesday: Breakfast - Protein Smoothie, Lunch - Tuna Salad, Dinner - Grilled Steak",
+        "Thursday: Breakfast - Cottage Cheese with Fruits, Lunch - Turkey Wrap, Dinner - Quinoa Bowl",
+        "Friday: Breakfast - Egg White Omelette, Lunch - Chicken Breast with Broccoli, Dinner - Grilled Tofu",
+        "Saturday: Breakfast - Protein Pancakes, Lunch - Steak Salad, Dinner - Baked Cod",
+        "Sunday: Breakfast - Protein Waffles, Lunch - Roasted Chicken with Veggies, Dinner - Lentil Soup"
+      ]
+    }
+  ]
+}
