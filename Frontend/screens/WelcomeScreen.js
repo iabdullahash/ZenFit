@@ -38,7 +38,7 @@ const WelcomeScreen = () => {
           }}
           resizeMode="contain"
           source={require("../assets/images/logo1.png")}
-        />
+        />  
         <View
           style={{
             paddingHorizontal: Spacing * 4,

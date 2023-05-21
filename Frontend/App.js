@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import MainScreen from './screens/MainScreen';
 import LoginScreen from './screens/LoginScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -26,6 +27,7 @@ const App = () => {
             headerShown: false
           }}
         >
+          <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           {/* <Stack.Screen name="Age" component={Agescreen} /> */}
           <Stack.Screen name="Login" component={LoginScreen} />
