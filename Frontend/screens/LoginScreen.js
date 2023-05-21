@@ -80,7 +80,7 @@ const LoginScreen = () => {
               alignSelf: "flex-end",
             }}
           >
-            Forgot your password ?
+            Forgot your password?
           </Text>
         </View>
 
