@@ -37,8 +37,8 @@ import {
 //------------------------------------------------------Flat list-----------------------------------------
     const Flat_data = [
       { id: '1', title: 'Personal Information' , screen:'Personal_info'},
-      { id: '2', title: 'Security & Passwords' , screen: ''},
-      { id: '3', title: 'Goals' , screen:''},
+      { id: '2', title: 'Security & Passwords' , screen: 'Password_chg'},
+      { id: '3', title: 'Goals' , screen:'Goals'},
       
     ];
 
@@ -110,9 +110,11 @@ import {
           </Text>
           <View
             style={{
+              paddingTop: Spacing*2,
               flexDirection: 'row',
               // justifyContent:'space-between',
               alignItems:'center',
+
 
 
             }}
@@ -320,23 +322,334 @@ import {
 
       </SafeAreaView>
     );
-  }
+  };
 
   const Password_chg = () =>{
 
+    const navigation = useNavigation();
+    
+    return (
+      <SafeAreaView
+      style={{
+        backgroundColor: Colors.background,
+        flex:1,
+        alignItems:'center',
+        justifyContent:'center'
+        }}>
+        <View
+            style={{
+                paddingHorizontal: Spacing * 2,
+                paddingTop: Spacing * 8,
+                width:'100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                padding: 16,
+            }}
+        
+        >
+          <Text
+              style={{
+                  fontSize: FontSize.xLarge,
+                  color: Colors.primary,
+                  top: 0,
+                  left: 0,
+                  fontFamily: Font["poppins-bold"],
+                  // textAlign: "center",
+                  marginBottom: Spacing*3
+              }}
+          >
+              Security & Password
+
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              // justifyContent:'space-between',
+              alignItems:'center',
 
 
+            }}
+          >
+
+              <Image
+                source = {require('../constants/cow.jpg')}
+                style={styles.Image}
+              />
+              <Text
+                style={{
+                  fontSize: FontSize.medium,
+                  color: Colors.text,
+                  fontFamily: Font["poppins-regular"],
+                }}
+              >
+                Holy Cow
+                  
+
+              </Text>
+
+          </View>
+
+          <View
+           style = {{
+            flexDirection: 'column',
+            alignItems: 'center',
+            
+
+           }}
+          >
+            <View
+              style={{
+                paddingTop: Spacing*3,
+              }}
+            
+            >
+            <Text
+              style = {styles.personal_txt}
+            >
+              Old Password
+            </Text>
+
+            <AppTextInput placeholder="Password" inputMode="email-address" />
 
 
-  }
+            </View>
+
+            <View>
+            <Text
+              style = {styles.personal_txt}
+            >
+              New Password
+            </Text>
+
+            <AppTextInput placeholder="" inputMode="email-address" />
+
+
+            </View>
+
+            <View>
+            <Text
+              style = {styles.personal_txt}
+            >
+              Confirm Password
+            </Text>
+
+            <AppTextInput placeholder="" inputMode="email-address" />
+
+
+            </View>
+          
+
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent:'space-between',
+              alignItems:'center',
+              paddingTop: Spacing*3,
+
+            }}
+          >
+            <TouchableOpacity
+          style={styles.per_info_btn_back}
+        >
+          <ArrowButton onPress={() => navigation.navigate("testing")}/>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          style={styles.per_info_btn_save}
+        >
+          <Text
+            style={{
+              fontFamily: Font["poppins-bold"],
+              color: Colors.onPrimary,
+              textAlign: "center",
+              fontSize: FontSize.medium,
+            }}
+          >
+            Save Changes
+          </Text>
+        </TouchableOpacity>
+
+          </View>
+
+        </View>
+
+      </SafeAreaView>
+
+    );
+
+  };
 
   const Goals = () =>{
+    const navigation = useNavigation();
+    
+    return (
+      <SafeAreaView
+      style={{
+        backgroundColor: Colors.background,
+        flex:1,
+        alignItems:'center',
+        justifyContent:'center'
+        }}>
+        <View
+            style={{
+                paddingHorizontal: Spacing * 2,
+                paddingTop: Spacing * 8,
+                width:'100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                padding: 16,
+            }}
+        
+        >
+          <Text
+              style={{
+                  fontSize: FontSize.xLarge,
+                  color: Colors.primary,
+                  top: 0,
+                  left: 0,
+                  fontFamily: Font["poppins-bold"],
+                  // textAlign: "center",
+                  marginBottom: Spacing*3
+              }}
+          >
+              Goals
+
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              // justifyContent:'space-between',
+              alignItems:'center',
 
 
+            }}
+          >
+
+              <Image
+                source = {require('../constants/cow.jpg')}
+                style={styles.Image}
+              />
+              <Text
+                style={{
+                  fontSize: FontSize.medium,
+                  color: Colors.text,
+                  fontFamily: Font["poppins-regular"],
+                }}
+              >
+                Holy Cow
+                  
+
+              </Text>
+
+          </View>
+
+          <View
+           style = {{
+            flexDirection: 'column',
+            // alignItems: 'center',
+            
+
+           }}
+          >
+            <View
+              style={{
+                paddingTop: Spacing*3,
+                paddingBottom:Spacing*3,
+                alignItems: 'center',
+              }}
+            
+            >
+            <Text
+              style = {{
+                fontSize: FontSize.xxLarge,
+                color: Colors.primary,
+                fontFamily: Font["poppins-regular"],
+              }}
+            >
+              10,000
+
+            </Text>
+            </View>
+
+            <View>
+            <Text
+              style = {styles.personal_txt}
+            >
+              Change steps
+            </Text>
+
+            <AppTextInput placeholder="" inputMode="email-address" />
 
 
+            </View>
 
-  }
+            <View>
+            <Text
+              style = {[styles.personal_txt,
+                {paddingTop: Spacing*2,
+                paddingBottom:Spacing*2,}]}
+            >
+              Calories burnt
+            </Text>
+
+            <Text
+              style = {{
+                fontSize: FontSize.xxLarge,
+                color: Colors.primary,
+                fontFamily: Font["poppins-regular"],
+                textAlign: 'center'
+              }}
+            >
+              ------
+            </Text>
+
+
+            </View>
+          
+
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent:'space-between',
+              alignItems:'center',
+              paddingTop: Spacing*3,
+
+            }}
+          >
+            <TouchableOpacity
+          style={styles.per_info_btn_back}
+        >
+          <ArrowButton onPress={() => navigation.navigate("testing")}/>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          style={styles.per_info_btn_save}
+        >
+          <Text
+            style={{
+              fontFamily: Font["poppins-bold"],
+              color: Colors.onPrimary,
+              textAlign: "center",
+              fontSize: FontSize.medium,
+            }}
+          >
+            Save Changes
+          </Text>
+        </TouchableOpacity>
+
+          </View>
+
+        </View>
+
+      </SafeAreaView>
+
+    );
+
+  };
 
   const styles = StyleSheet.create({
     Image:{
@@ -350,6 +663,7 @@ import {
       fontSize: FontSize.small,
       color: Colors.primary,
       fontFamily: Font["poppins-regular"],
+      
       
 
     },
