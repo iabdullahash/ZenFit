@@ -7,7 +7,6 @@ import MainScreen from './screens/MainScreen';
 import LoginScreen from './screens/LoginScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import SignupScreen from './screens/SignupScreen';
-import Testing from './screens/testing';
 import Colors from './constants/Colors';
 import fonts from './config/fonts';
 
@@ -28,12 +27,10 @@ const App = () => {
             headerShown: false
           }}
         >
-          <Stack.Screen name="testing" component={Testing} />
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Signup" component={SignupScreen} />
-          {/* <Stack.Screen name="testing" component={Testing} /> */}
         </Stack.Navigator>
         <StatusBar />
       </View>

@@ -6,7 +6,7 @@ import MealsScreen from './MealsScreen';
 import PlansScreen from './PlansScreen';
 import ProfileScreen from './ProfileScreen';
 import Colors from '../constants/Colors';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons , FontAwesome } from '@expo/vector-icons';
 import Font from "../constants/Fonts";
 import fonts from '../config/fonts';
 import FontSize from '../constants/FontSize';
@@ -19,21 +19,23 @@ const MainScreen = () => {
       tabBarShowLabel: false,
       tabBarStyle: {
           position: 'absolute',
-          bottom: 30,
-          left: 15,
-          right: 15,
+          // bottom: 30,
+          // left: 25,
+          // right: 25,
           elevation: 0,
-          backgroundColor: Colors.darkText,
-          borderRadius: 30,
+          backgroundColor: "#565656",
           borderTopColor:Colors.darkText,
-          height: 60,
+          borderTopRightRadius:20,          
+          borderTopLeftRadius:20,          
+          height: 90,
           ...styles.shadow
         }
     }}>
       <Tab.Screen name="Home" component={HomeScreen} options={{
         tabBarIcon:({focused}) => (
           <View style={styles.view}>
-            <Image
+            <MaterialCommunityIcons name={focused ?"view-dashboard" : "view-dashboard-outline"} color={focused ? Colors.primary : Colors.text} size={28} />
+            {/* <Image
               source={require('../assets/images/dashboard.png')}
               resizeMode='contain'
               style={{
@@ -41,8 +43,8 @@ const MainScreen = () => {
                 height:20,
                 tintColor: focused ? Colors.primary :  Colors.onPrimary,
               }}
-              />
-              <Text style={{color: focused ? Colors.primary : Colors.onPrimary,...styles.text}}>
+              /> */}
+              <Text style={{color: focused ? Colors.primary : Colors.text,...styles.text}}>
                 DashBoard
               </Text>
           </View>
@@ -51,15 +53,8 @@ const MainScreen = () => {
       <Tab.Screen name="Meals" component={MealsScreen} options={{
         tabBarIcon:({focused}) => (
           <View style={styles.view}>
-            <Image
-              source={require('../assets/images/diary.png')}
-              resizeMode='contain'
-              style={{
-                width:20,
-                height:20,
-                tintColor: focused ? Colors.primary :  Colors.onPrimary,
-              }}
-              />
+              <MaterialCommunityIcons name={focused ?"food" : "food-outline"} color={focused ? Colors.primary : Colors.text} size={28} />
+
               <Text style={{color: focused ? Colors.primary : Colors.onPrimary,...styles.text}}>
                 Diary
               </Text>
@@ -69,15 +64,7 @@ const MainScreen = () => {
       <Tab.Screen name="Plans" component={PlansScreen} options={{
         tabBarIcon:({focused}) => (
           <View style={styles.view}>
-            <Image
-              source={require('../assets/images/plans.png')}
-              resizeMode='contain'
-              style={{
-                width:20,
-                height:20,
-                tintColor: focused ? Colors.primary :  Colors.onPrimary,
-              }}
-              />
+                        <MaterialCommunityIcons name={focused ?"clipboard-text" : "clipboard-text-outline"} color={focused ? Colors.primary : Colors.text} size={28} />
               <Text style={{color: focused ? Colors.primary : Colors.onPrimary,...styles.text}}>
                 Plans
               </Text>
@@ -87,15 +74,7 @@ const MainScreen = () => {
       <Tab.Screen name="Profile" component={ProfileScreen} options={{
         tabBarIcon:({focused}) => (
           <View style={styles.view}>
-            <Image
-              source={require('../assets/images/profile.png')}
-              resizeMode='contain'
-              style={{
-                width:20,
-                height:20,
-                tintColor: focused ? Colors.primary :  Colors.onPrimary,
-              }}
-              />
+            <FontAwesome name={focused ?"user-circle" : "user-circle-o"} color={focused ? Colors.primary : Colors.text} size={28} />
               <Text style={{color: focused ? Colors.primary : Colors.onPrimary,...styles.text}}>
                 Profile
               </Text>
@@ -112,7 +91,7 @@ const styles = StyleSheet.create({
   view:{
     alignItems:'center',
     justifyContent:'center',
-    top:3
+    // top:
   },
   text:{
     fontFamily: Font["poppins-regular"],
@@ -126,6 +105,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity:0.25,
     shadowRadiusL: 3.5,
-    elevation: 9  
+    elevation: 8  
   },
 });
