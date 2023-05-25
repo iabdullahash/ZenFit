@@ -319,7 +319,7 @@ import {
               // styles.per_info_btn_back
             }
           >
-            <ArrowButton onPress={() => navigation.goBack()}/>
+            <ArrowButton onPress={() => navigation.navigate("Profile_")}/>
           </TouchableOpacity>
           
           <TouchableOpacity
@@ -486,7 +486,7 @@ import {
             <TouchableOpacity
           style={styles.backButton}
         >
-          <ArrowButton onPress={() => navigation.goBack()}/>
+          <ArrowButton onPress={() => navigation.navigate('Profile_')}/>
         </TouchableOpacity>
         
         <TouchableOpacity
@@ -662,7 +662,7 @@ import {
             <TouchableOpacity
           style={styles.backButton}
         >
-          <ArrowButton onPress={() => navigation.goBack()}/>
+          <ArrowButton onPress={() => navigation.navigate("Profile_")}/>
         </TouchableOpacity>
         
         <TouchableOpacity
