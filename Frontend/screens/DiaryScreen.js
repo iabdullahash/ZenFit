@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity , SafeAreaView} from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity , SafeAreaView,ScrollView} from 'react-native';
 import Colors from '../constants/Colors';
 import Spacing from '../constants/Spacing';
 import Fonts from '../constants/Fonts';
@@ -10,7 +10,7 @@ const DiaryScreen = () => {
   const [breakfastItems, setBreakfastItems] = useState([]);
   const [lunchItems, setLunchItems] = useState([]);
   const [dinnerItems, setDinnerItems] = useState([]);
-  const [snackItems, setSnackItems] = useState([]);
+  const [snackItems, setSnackItems] = useState(["ash","ghhf","fdfdgd"]);
 
   const handleAddItem = (mealType) => {
     // Handle logic to add items to the respective meal arrays
@@ -55,9 +55,15 @@ const DiaryScreen = () => {
       </View>
 
       <View style={styles.separator} />
+      <ScrollView style={styles.scrollViewContainer} showsVerticalScrollIndicator={false}>
 
       <View style={styles.mealSection}>
-        <Text style={styles.mealTitle}>Breakfast</Text>
+        <View style={styles.mealBorder}>
+          <Text style={styles.mealTitle}>Breakfast</Text>
+          <Text style={styles.mealTitle}>0</Text>
+        </View>
+              <View style={{...styles.separator,height:1.5}} />
+
         {breakfastItems.map((item, index) => (
           <Text key={index} style={styles.mealItem}>{item}</Text>
         ))}
@@ -70,7 +76,11 @@ const DiaryScreen = () => {
       </View>
 
       <View style={styles.mealSection}>
-        <Text style={styles.mealTitle}>Lunch</Text>
+      <View style={styles.mealBorder}>
+          <Text style={styles.mealTitle}>Lunch</Text>
+          <Text style={styles.mealTitle}>0</Text>
+        </View>
+              <View style={{...styles.separator,height:1.5}} />
         {lunchItems.map((item, index) => (
           <Text key={index} style={styles.mealItem}>{item}</Text>
         ))}
@@ -83,7 +93,11 @@ const DiaryScreen = () => {
       </View>
 
       <View style={styles.mealSection}>
-        <Text style={styles.mealTitle}>Dinner</Text>
+      <View style={styles.mealBorder}>
+          <Text style={styles.mealTitle}>Dinner</Text>
+          <Text style={styles.mealTitle}>0</Text>
+        </View>
+              <View style={{...styles.separator,height:1.5}} />
         {dinnerItems.map((item, index) => (
           <Text key={index} style={styles.mealItem}>{item}</Text>
         ))}
@@ -96,7 +110,11 @@ const DiaryScreen = () => {
       </View>
 
       <View style={styles.mealSection}>
-        <Text style={styles.mealTitle}>Snacks</Text>
+      <View style={styles.mealBorder}>
+          <Text style={styles.mealTitle}>Snacks</Text>
+          <Text style={styles.mealTitle}>0</Text>
+        </View>
+              <View style={{...styles.separator,height:1.5}} />
         {snackItems.map((item, index) => (
           <Text key={index} style={styles.mealItem}>{item}</Text>
         ))}
@@ -107,23 +125,30 @@ const DiaryScreen = () => {
           <Text style={styles.addButtonText}>+ Add Item</Text>
         </TouchableOpacity>
       </View>
+    </ScrollView>
     </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollViewContainer: {
+    flexGrow: 1,
+  // alignItems: 'center',
+  // justifyContent: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.background,
     padding: Spacing*1.6,
-    paddingTop: Spacing*6
+    paddingTop: Spacing*6,
+    paddingBottom:Spacing*8
   },
   calorieSection:{
     flexDirection: 'row',
     alignItems:'center',
     justifyContent: 'space-around',
-    marginBottom: Spacing*2.4
+    marginBottom: Spacing*2.4,
   },
   calorieCalculation:{
     flexDirection:'column',
@@ -159,13 +184,22 @@ const styles = StyleSheet.create({
   mealSection: {
     marginBottom: Spacing*2.4,
   },
+  mealBorder:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    // borderBottomWidth:3,
+    // borderBottomColor:Colors.accent,
+    
+  },
   mealTitle: {
     fontFamily: Fonts["poppins-bold"],
     fontSize: 18,
     color: Colors.text,
     marginBottom: Spacing*0.8,
-    borderBottomWidth:3,
-    borderBottomColor:Colors.accent
+    // borderBottomWidth:3,
+    
+    // borderBottomColor:Colors.accent
   },
   mealItem: {
     fontFamily: Fonts["poppins-bold"],
