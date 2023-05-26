@@ -22,6 +22,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <View style={styles.container}>
+      
         <Stack.Navigator
           screenOptions={{
             headerShown: false
@@ -32,7 +33,7 @@ const App = () => {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Signup" component={SignupScreen} />
         </Stack.Navigator>
-        <StatusBar />
+        <StatusBar style="light" />
       </View>
     </NavigationContainer>
   );

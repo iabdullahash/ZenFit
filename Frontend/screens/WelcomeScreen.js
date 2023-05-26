@@ -78,7 +78,7 @@ const WelcomeScreen = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("testing")}
+            onPress={() => navigation.navigate("Login")}
             style={{
               backgroundColor: Colors.primary,
               paddingVertical: Spacing * 1.5,
@@ -109,7 +109,7 @@ const WelcomeScreen = () => {
           <TouchableOpacity
             onPress={() => navigation.navigate("Signup")}
             style={{
-              backgroundColor: Colors.darkText,
+              backgroundColor: Colors.accent,
               paddingVertical: Spacing * 1.5,
               paddingHorizontal: Spacing * 2,
               width: "48%",

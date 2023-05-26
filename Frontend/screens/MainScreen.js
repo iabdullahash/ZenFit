@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import{View,Text,StyleSheet,Image} from 'react-native';
 import HomeScreen from './HomeScreen';
-import MealsScreen from './MealsScreen';
+import DiaryScreen from './DiaryScreen';
 import PlansScreen from './PlansScreen';
 import ProfileScreen from './ProfileScreen';
 import Colors from '../constants/Colors';
@@ -23,8 +23,8 @@ const MainScreen = () => {
           // left: 25,
           // right: 25,
           elevation: 0,
-          backgroundColor: "#565656",
-          borderTopColor:Colors.darkText,
+          backgroundColor: Colors.accent,
+          borderTopColor:Colors.accent,
           borderTopRightRadius:20,          
           borderTopLeftRadius:20,          
           height: 90,
@@ -50,7 +50,7 @@ const MainScreen = () => {
           </View>
         )
       }} />
-      <Tab.Screen name="Meals" component={MealsScreen} options={{
+      <Tab.Screen name="Meals" component={DiaryScreen} options={{
         tabBarIcon:({focused}) => (
           <View style={styles.view}>
               <MaterialCommunityIcons name={focused ?"food" : "food-outline"} color={focused ? Colors.primary : Colors.text} size={28} />

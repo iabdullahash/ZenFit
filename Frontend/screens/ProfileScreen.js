@@ -748,7 +748,7 @@ import {
     saveButton: {
       padding: Spacing * 1.5,
       height: Spacing * 6,
-      backgroundColor: '#878585',
+      backgroundColor: Colors.primary,
       marginVertical: Spacing * 1,
       borderRadius: Spacing,
       shadowColor: Colors.primary,

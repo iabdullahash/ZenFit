@@ -359,7 +359,7 @@ const WeightScreen = ({ route }) => {
           <TouchableOpacity
             onPress={() => setUnit('lbs')}
             style={{
-              backgroundColor: unit === 'lbs' ? Colors.primary: Colors.darkText,
+              backgroundColor: unit === 'lbs' ? Colors.primary: Colors.accent,
               paddingVertical: Spacing * 1.5,
               paddingHorizontal: Spacing * 2,
               width: "30%",
@@ -389,7 +389,7 @@ const WeightScreen = ({ route }) => {
           <TouchableOpacity
             onPress={() => setUnit('kg')}
             style={{
-              backgroundColor: unit === 'kg' ? Colors.primary: Colors.darkText,
+              backgroundColor: unit === 'kg' ? Colors.primary: Colors.accent,
               paddingVertical: Spacing * 1.5,
               paddingHorizontal: Spacing * 2,
               width: "30%",
@@ -504,7 +504,7 @@ const SignupScreen = ({ route }) => {
           
         </View>
 
-        <TouchableOpacity
+        <TouchableOpacity onPress={() => navigation.navigate("Main")}
           style={{
             padding: Spacing*1.5,
             height:Spacing*6,
