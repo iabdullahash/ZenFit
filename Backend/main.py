@@ -68,7 +68,21 @@ def signup():
     return jsonify({'message': 'Signup successful'})
 
 
+@app.route("/api/meal_plans", methods=["GET"])
+def get_meal_plans():
+    
+    data = load_data()
+    meal_plans = data["mealPlans"]
 
+    return jsonify(meal_plans)
+
+@app.route("/api/workout_plans", methods=["GET"])
+def get_workout_plans():
+
+    data = load_data()
+    workout_plans = data["workoutPlans"]
+
+    return jsonify(workout_plans)
 
 
 
