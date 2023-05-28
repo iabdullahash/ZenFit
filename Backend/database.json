@@ -1,356 +1,378 @@
 {
-  "users": [
-    {
-      "name":"Maaz Siddiqui",
-      "email": "yourdaddy257@gmail.com",
-      "password": "googleisgay123",
-      "weight": 44,
-      "height": 160,
-      "age": 20,
-      "goals": {
-        "requiredCalories": 5000,
-        "dailyStepsGoal": 100
-      },
-      "googleAuthKey": "1234567890",
-      "activity": {
-        "stepCount": [5000, 6000, 8000, 9000, 7500, 10000, 12000],
-        "caloriesBurnt": [250, 300, 400, 450, 375, 500, 600]
-      },
-      "meals": [
+    "users": [
         {
-          "food": "Chicken Breast",
-          "quantity":null,
-          "calories": 250
+            "name": "Maaz Siddiqui",
+            "email": "yourdaddy257@gmail.com",
+            "password": "googleisgay123",
+            "weight": 44,
+            "height": 160,
+            "age": 20,
+            "goals": {
+                "requiredCalories": 5000,
+                "dailyStepsGoal": 100
+            },
+            "googleAuthKey": "1234567890",
+            "activity": {
+                "stepCount": [
+                    5000,
+                    6000,
+                    8000,
+                    9000,
+                    7500,
+                    10000,
+                    12000
+                ],
+                "caloriesBurnt": [
+                    250,
+                    300,
+                    400,
+                    450,
+                    375,
+                    500,
+                    600
+                ]
+            },
+            "meals": [
+                {
+                    "food": "Chicken Breast",
+                    "quantity": null,
+                    "calories": 250
+                },
+                {
+                    "food": "Salad",
+                    "calories": 100
+                }
+            ]
+        },
+        {   
+            "name":"user2",
+            "email": "user2@example.com",
+            "password": "password2",
+            "weight": 65,
+            "height": 165,
+            "age": 30,
+            "goals": {
+                "requiredCalories": 1800,
+                "dailyStepsGoal": 8000
+            },
+            "googleAuthKey": "0987654321",
+            "activity": [
+                {
+                    "date": "2023-05-01",
+                    "stepCount": 5000,
+                    "caloriesBurnt": 250
+                },
+                {
+                    "date": "2023-05-02",
+                    "stepCount": 6000,
+                    "caloriesBurnt": 300
+                },
+                {
+                    "date": "2023-05-03",
+                    "stepCount": 8000,
+                    "caloriesBurnt": 400
+                }
+            ],
+            "meals": [
+                {
+                    "food": "Salmon",
+                    "calories": 300
+                },
+                {
+                    "food": "Rice",
+                    "calories": 150
+                }
+            ]
         },
         {
-          "food": "Salad",
-          "calories": 100
+            "name": "Ash",
+            "email": "asdfghj@gmail.com",
+            "password": "1234567"
         }
-      ]
-    },
-    {
-      "email": "user2@example.com",
-      "password": "password2",
-      "weight": 65,
-      "height": 165,
-      "age": 30,
-      "goals": {
-        "requiredCalories": 1800,
-        "dailyStepsGoal": 8000
-      },
-      "googleAuthKey": "0987654321",
-      "activity": [
+    ],
+    "workoutPlans": [
         {
-          "date": "2023-05-01",
-          "stepCount": 5000,
-          "caloriesBurnt": 250
+            "id": 1,
+            "title": "Strength Training for Beginners",
+            "description": "A comprehensive strength training program for beginners.",
+            "image": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d29ya291dHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+            "details": "This workout plan is designed for individuals who are new to strength training and want to build a foundation of strength. The plan consists of three strength training sessions per week, with each session focusing on different muscle groups.",
+            "workouts": [
+                {
+                    "day": "Monday",
+                    "exercises": [
+                        {
+                            "name": "Squat",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Bench Press",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Bent-Over Row",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Lunges",
+                            "sets": 3,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Plank",
+                            "sets": 3,
+                            "duration": "30 seconds"
+                        }
+                    ]
+                },
+                {
+                    "day": "Wednesday",
+                    "exercises": [
+                        {
+                            "name": "Deadlift",
+                            "sets": 3,
+                            "reps": 6
+                        },
+                        {
+                            "name": "Overhead Press",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Pull-Ups",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Step-Ups",
+                            "sets": 3,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Russian Twist",
+                            "sets": 3,
+                            "reps": 12
+                        }
+                    ]
+                },
+                {
+                    "day": "Friday",
+                    "exercises": [
+                        {
+                            "name": "Leg Press",
+                            "sets": 3,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Incline Dumbbell Press",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Lat Pulldown",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Hamstring Curl",
+                            "sets": 3,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Hanging Leg Raise",
+                            "sets": 3,
+                            "reps": 12
+                        }
+                    ]
+                }
+            ]
         },
         {
-          "date": "2023-05-02",
-          "stepCount": 6000,
-          "caloriesBurnt": 300
-        },
-        {
-          "date": "2023-05-03",
-          "stepCount": 8000,
-          "caloriesBurnt": 400
+            "id": 2,
+            "title": "Fat Loss and Toning",
+            "description": "A workout plan to help you burn fat and tone your body.",
+            "image": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d29ya291dHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+            "details": "This workout plan is designed to help you lose body fat and sculpt a lean physique. The plan consists of four workout sessions per week, alternating between cardio and strength training.",
+            "workouts": [
+                {
+                    "day": "Monday",
+                    "type": "Cardio",
+                    "exercises": [
+                        {
+                            "name": "Treadmill Jogging",
+                            "duration": "20 minutes"
+                        },
+                        {
+                            "name": "Jumping Jacks",
+                            "duration": "3 sets of 30 seconds"
+                        },
+                        {
+                            "name": "Mountain Climbers",
+                            "duration": "3 sets of 10 reps"
+                        },
+                        {
+                            "name": "Cycling",
+                            "duration": "15 minutes"
+                        },
+                        {
+                            "name": "Burpees",
+                            "duration": "3 sets of 10 reps"
+                        }
+                    ]
+                },
+                {
+                    "day": "Tuesday",
+                    "type": "Strength Training",
+                    "exercises": [
+                        {
+                            "name": "Dumbbell Squat",
+                            "sets": 3,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Push-Ups",
+                            "sets": 3,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Dumbbell Shoulder Press",
+                            "sets": 3,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Dumbbell Bent-Over Row",
+                            "sets": 3,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Plank",
+                            "sets": 3,
+                            "duration": "30 seconds"
+                        }
+                    ]
+                },
+                {
+                    "day": "Thursday",
+                    "type": "Cardio",
+                    "exercises": [
+                        {
+                            "name": "Elliptical Training",
+                            "duration": "20 minutes"
+                        },
+                        {
+                            "name": "Jump Rope",
+                            "duration": "3 sets of 1 minute"
+                        },
+                        {
+                            "name": "High Knees",
+                            "duration": "3 sets of 10 reps"
+                        },
+                        {
+                            "name": "Stair Climbing",
+                            "duration": "15 minutes"
+                        },
+                        {
+                            "name": "Mountain Climbers",
+                            "duration": "3 sets of 10 reps"
+                        }
+                    ]
+                },
+                {
+                    "day": "Friday",
+                    "type": "Strength Training",
+                    "exercises": [
+                        {
+                            "name": "Barbell Squat",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Barbell Bench Press",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Barbell Deadlift",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Barbell Bent-Over Row",
+                            "sets": 3,
+                            "reps": 8
+                        },
+                        {
+                            "name": "Russian Twist",
+                            "sets": 3,
+                            "reps": 12
+                        }
+                    ]
+                }
+            ]
         }
-      ],
-      "meals": [
+    ],
+    "mealPlans": [
         {
-          "food": "Salmon",
-          "calories": 300
-        },
-        {
-          "food": "Rice",
-          "calories": 150
+            "id": 1,
+            "title": "Healthy Eating Meal Plan",
+            "description": "A balanced and nutritious meal plan for healthy eating.",
+            "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVhbHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+            "details": "This meal plan is designed to provide a balanced and nutritious diet for overall health and well-being. It includes three main meals and two snacks per day, with a focus on whole foods and portion control.",
+            "meals": [
+                {
+                    "day": "Monday",
+                    "breakfast": "Oatmeal with berries and a sprinkle of almonds",
+                    "lunch": "Grilled chicken breast with quinoa and steamed vegetables",
+                    "dinner": "Salmon fillet with roasted sweet potatoes and saut\u00c3\u00a9ed spinach",
+                    "snacks": [
+                        "Greek yogurt with mixed nuts",
+                        "Carrot sticks with hummus"
+                    ]
+                },
+                {
+                    "day": "Tuesday",
+                    "breakfast": "Vegetable omelette with whole grain toast",
+                    "lunch": "Mixed green salad with grilled shrimp and balsamic dressing",
+                    "dinner": "Turkey meatballs with whole wheat pasta and marinara sauce",
+                    "snacks": [
+                        "Apple slices with almond butter",
+                        "Hard-boiled eggs"
+                    ]
+                },
+                {
+                    "day": "Wednesday",
+                    "breakfast": "Smoothie with spinach, banana, almond milk, and chia seeds",
+                    "lunch": "Quinoa salad with roasted vegetables and feta cheese",
+                    "dinner": "Grilled tofu with brown rice and stir-fried vegetables",
+                    "snacks": [
+                        "Cottage cheese with sliced peaches",
+                        "Trail mix with dried fruits and nuts"
+                    ]
+                },
+                {
+                    "day": "Thursday",
+                    "breakfast": "Whole grain toast with avocado and poached eggs",
+                    "lunch": "Chicken and vegetable stir-fry with brown rice",
+                    "dinner": "Baked cod with quinoa and steamed broccoli",
+                    "snacks": [
+                        "Celery sticks with peanut butter",
+                        "Cherry tomatoes with mozzarella"
+                    ]
+                },
+                {
+                    "day": "Friday",
+                    "breakfast": "Yogurt parfait with granola and mixed berries",
+                    "lunch": "Tuna salad wrap with whole wheat tortilla and mixed greens",
+                    "dinner": "Grilled steak with roasted potatoes and grilled asparagus",
+                    "snacks": [
+                        "Mixed fruit salad",
+                        "Rice cakes with almond butter"
+                    ]
+                }
+            ]
         }
-      ]
-    }
-  ],
-  "workoutPlans": [
-    {
-      "id": 1,
-      "title": "Strength Training for Beginners",
-      "description": "A comprehensive strength training program for beginners.",
-      "image": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d29ya291dHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-      "details": "This workout plan is designed for individuals who are new to strength training and want to build a foundation of strength. The plan consists of three strength training sessions per week, with each session focusing on different muscle groups.",
-      "workouts": [
-        {
-          "day": "Monday",
-          "exercises": [
-            {
-              "name": "Squat",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Bench Press",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Bent-Over Row",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Lunges",
-              "sets": 3,
-              "reps": 10
-            },
-            {
-              "name": "Plank",
-              "sets": 3,
-              "duration": "30 seconds"
-            }
-          ]
-        },
-        {
-          "day": "Wednesday",
-          "exercises": [
-            {
-              "name": "Deadlift",
-              "sets": 3,
-              "reps": 6
-            },
-            {
-              "name": "Overhead Press",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Pull-Ups",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Step-Ups",
-              "sets": 3,
-              "reps": 10
-            },
-            {
-              "name": "Russian Twist",
-              "sets": 3,
-              "reps": 12
-            }
-          ]
-        },
-        {
-          "day": "Friday",
-          "exercises": [
-            {
-              "name": "Leg Press",
-              "sets": 3,
-              "reps": 10
-            },
-            {
-              "name": "Incline Dumbbell Press",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Lat Pulldown",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Hamstring Curl",
-              "sets": 3,
-              "reps": 10
-            },
-            {
-              "name": "Hanging Leg Raise",
-              "sets": 3,
-              "reps": 12
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Fat Loss and Toning",
-      "description": "A workout plan to help you burn fat and tone your body.",
-      "image": "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d29ya291dHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-      "details": "This workout plan is designed to help you lose body fat and sculpt a lean physique. The plan consists of four workout sessions per week, alternating between cardio and strength training.",
-      "workouts": [
-        {
-          "day": "Monday",
-          "type": "Cardio",
-          "exercises": [
-            {
-              "name": "Treadmill Jogging",
-              "duration": "20 minutes"
-            },
-            {
-              "name": "Jumping Jacks",
-              "duration": "3 sets of 30 seconds"
-            },
-            {
-              "name": "Mountain Climbers",
-              "duration": "3 sets of 10 reps"
-            },
-            {
-              "name": "Cycling",
-              "duration": "15 minutes"
-            },
-            {
-              "name": "Burpees",
-              "duration": "3 sets of 10 reps"
-            }
-          ]
-        },
-        {
-          "day": "Tuesday",
-          "type": "Strength Training",
-          "exercises": [
-            {
-              "name": "Dumbbell Squat",
-              "sets": 3,
-              "reps": 10
-            },
-            {
-              "name": "Push-Ups",
-              "sets": 3,
-              "reps": 10
-            },
-            {
-              "name": "Dumbbell Shoulder Press",
-              "sets": 3,
-              "reps": 10
-            },
-            {
-              "name": "Dumbbell Bent-Over Row",
-              "sets": 3,
-              "reps": 10
-            },
-            {
-              "name": "Plank",
-              "sets": 3,
-              "duration": "30 seconds"
-            }
-          ]
-        },
-        {
-          "day": "Thursday",
-          "type": "Cardio",
-          "exercises": [
-            {
-              "name": "Elliptical Training",
-              "duration": "20 minutes"
-            },
-            {
-              "name": "Jump Rope",
-              "duration": "3 sets of 1 minute"
-            },
-            {
-              "name": "High Knees",
-              "duration": "3 sets of 10 reps"
-            },
-            {
-              "name": "Stair Climbing",
-              "duration": "15 minutes"
-            },
-            {
-              "name": "Mountain Climbers",
-              "duration": "3 sets of 10 reps"
-            }
-          ]
-        },
-        {
-          "day": "Friday",
-          "type": "Strength Training",
-          "exercises": [
-            {
-              "name": "Barbell Squat",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Barbell Bench Press",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Barbell Deadlift",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Barbell Bent-Over Row",
-              "sets": 3,
-              "reps": 8
-            },
-            {
-              "name": "Russian Twist",
-              "sets": 3,
-              "reps": 12
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "mealPlans": [
-    {
-      "id": 1,
-      "title": "Healthy Eating Meal Plan",
-      "description": "A balanced and nutritious meal plan for healthy eating.",
-      "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVhbHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-      "details": "This meal plan is designed to provide a balanced and nutritious diet for overall health and well-being. It includes three main meals and two snacks per day, with a focus on whole foods and portion control.",
-      "meals": [
-        {
-          "day": "Monday",
-          "breakfast": "Oatmeal with berries and a sprinkle of almonds",
-          "lunch": "Grilled chicken breast with quinoa and steamed vegetables",
-          "dinner": "Salmon fillet with roasted sweet potatoes and sautéed spinach",
-          "snacks": [
-            "Greek yogurt with mixed nuts",
-            "Carrot sticks with hummus"
-          ]
-        },
-        {
-          "day": "Tuesday",
-          "breakfast": "Vegetable omelette with whole grain toast",
-          "lunch": "Mixed green salad with grilled shrimp and balsamic dressing",
-          "dinner": "Turkey meatballs with whole wheat pasta and marinara sauce",
-          "snacks": [
-            "Apple slices with almond butter",
-            "Hard-boiled eggs"
-          ]
-        },
-        {
-          "day": "Wednesday",
-          "breakfast": "Smoothie with spinach, banana, almond milk, and chia seeds",
-          "lunch": "Quinoa salad with roasted vegetables and feta cheese",
-          "dinner": "Grilled tofu with brown rice and stir-fried vegetables",
-          "snacks": [
-            "Cottage cheese with sliced peaches",
-            "Trail mix with dried fruits and nuts"
-          ]
-        },
-        {
-          "day": "Thursday",
-          "breakfast": "Whole grain toast with avocado and poached eggs",
-          "lunch": "Chicken and vegetable stir-fry with brown rice",
-          "dinner": "Baked cod with quinoa and steamed broccoli",
-          "snacks": [
-            "Celery sticks with peanut butter",
-            "Cherry tomatoes with mozzarella"
-          ]
-        },
-        {
-          "day": "Friday",
-          "breakfast": "Yogurt parfait with granola and mixed berries",
-          "lunch": "Tuna salad wrap with whole wheat tortilla and mixed greens",
-          "dinner": "Grilled steak with roasted potatoes and grilled asparagus",
-          "snacks": [
-            "Mixed fruit salad",
-            "Rice cakes with almond butter"
-          ]
-        }
-      ]
-    }
-  ]
+    ]
 }

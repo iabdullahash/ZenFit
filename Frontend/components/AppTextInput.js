@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const width = Dimensions.get("window").width;
 
-const AppTextInput = ({ inputMode, ...otherProps }) => {
+const AppTextInput = ({ inputMode, value, onChangeText,...otherProps }) => {
   const [focused, setFocused] = useState(false);
 
   // Determine if the password input should be masked
@@ -20,6 +20,8 @@ const AppTextInput = ({ inputMode, ...otherProps }) => {
   return (
     <View style={styles.container}>
       <TextInput
+        value={value}
+        onChangeText={onChangeText}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         placeholderTextColor={Colors.darkText}

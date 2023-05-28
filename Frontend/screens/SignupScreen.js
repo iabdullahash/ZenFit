@@ -5,7 +5,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Dimensions
+  Dimensions,
+  Alert
 } from "react-native";
 import { React ,useEffect,useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,6 +15,7 @@ import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
 import Font from "../constants/Fonts";
+import api from '../config/api/index';
 import { RulerPicker } from 'react-native-ruler-picker';
 import { Ionicons } from '@expo/vector-icons';
 import AppTextInput from "../components/AppTextInput";
@@ -444,11 +446,41 @@ const SignupScreen = ({ route }) => {
 
   const navigation = useNavigation();
   const { data = {} } = route.params || {};
-  // let data = [{
-  //   value: 'Male',
-  // }, {
-  //   value: 'Female',
-  // }];
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+ 
+  const handleSignup = async () => {
+    data.name = name;
+    data.email = email;
+    data.password = password;
+    try {
+      const response = await api.post('/signup', {data});
+  
+      if (response.status === 200) {
+        // Successful login
+        const data = response.data;
+        console.log(data);
+        navigation.navigate('Login');
+      } else {
+        // Other error occurred
+        console.log('Signup failed');
+        Alert.alert('Error', 'Signup failed. Please try again.');
+      }
+    } catch (error) {
+      if (error.response) {
+        // Request was made and server responded with an error status code
+        const errorMessage = error.response.data.message;
+        Alert.alert('Error', errorMessage);
+      } else if (error.request) {
+        // The request was made but no response was received
+        Alert.alert('Error', 'No response from the server. Please try again.');
+      } else {
+        // Other error occurred
+        Alert.alert('Error', 'Signup failed. Please try again.');
+      }
+    }
+  };
   return (
     <SafeAreaView
     style={{
@@ -494,9 +526,9 @@ const SignupScreen = ({ route }) => {
             marginVertical: Spacing * 3,
           }}
         >
-          <AppTextInput placeholder="Name" />
-          <AppTextInput placeholder="Email" inputMode="email-address" />
-          <AppTextInput placeholder="Password" inputMode="password" />
+          <AppTextInput placeholder="Name" value={name} onChangeText={setName} />
+          <AppTextInput placeholder="Email" value={email} onChangeText={setEmail} inputMode="email-address" />
+          <AppTextInput placeholder="Password" value={password} onChangeText={setPassword} inputMode="password" />
           {/* <Dropdown
             label='Gender'
             data={data}
@@ -504,7 +536,7 @@ const SignupScreen = ({ route }) => {
           
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Main")}
+        <TouchableOpacity onPress={handleSignup}
           style={{
             padding: Spacing*1.5,
             height:Spacing*6,

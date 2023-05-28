@@ -20,11 +20,11 @@ def save_data(data):
 
 #--------------------------------------------------- LOGIN ---------------------------------------------------
 
-@app.route('/api/login', methods=['POST'])
+@app.route('/api/login', methods=['GET','POST'])
 def login():
     email = request.json.get('email')
     password = request.json.get('password')
-
+    
     data = load_data()
     users = data.get('users', [])
 
@@ -32,12 +32,12 @@ def login():
         if user['email'] == email:
             if user['password'] == password:
                 # Successful login
-                return jsonify({'message': 'Login Successful'})
+                return jsonify({'message': 'Login Successful','result': user})
             else:
                 return jsonify({'message': 'Invalid Password'}), 401    
-        else:
-            return jsonify({'message': 'E-mail does not exist'}), 401
+        
             
+    return jsonify({'message': 'Email does not exist'}), 401        
     # Failed login
     return jsonify({'message': 'Invalid email or password'}), 401
 
@@ -47,9 +47,14 @@ def login():
 #--------------------------------------------------- SIGN-UP ---------------------------------------------------
 @app.route('/api/signup', methods=['POST'])
 def signup():
-    name = request.json.get('name')
-    email = request.json.get('email')
-    password = request.json.get('password')
+    details = request.json.get('data')
+    name = details['name']
+    email = details['email']
+    password = details['password']
+    gender = details['gender']
+    age = details['age']
+    height = details['height']
+    weight = details['weight']
 
     data = load_data()
     users = data.get('users', [])
@@ -67,6 +72,11 @@ def signup():
 
     return jsonify({'message': 'Signup successful'})
 
+
+@app.route("/test",methods=["GET"])
+def test():
+    data = request.json.get('data')
+    print(data)
 
 @app.route("/api/meal_plans", methods=["GET"])
 def get_meal_plans():

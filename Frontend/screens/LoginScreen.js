@@ -5,8 +5,9 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import { useNavigation } from '@react-navigation/native';
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
@@ -14,12 +15,44 @@ import Colors from "../constants/Colors";
 import Font from "../constants/Fonts";
 import { Ionicons } from "@expo/vector-icons";
 import AppTextInput from "../components/AppTextInput";
+import api from "../config/api/index"
 
 
 
 const LoginScreen = () => {
 
   const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const response = await api.post('/login', { email, password });
+  
+      if (response.status === 200) {
+        // Successful login
+        const data = response.data;
+        console.log(data);
+        navigation.navigate('Main');
+      } else {
+        // Other error occurred
+        console.log('Login failed');
+        Alert.alert('Error', 'Login failed. Please try again.');
+      }
+    } catch (error) {
+      if (error.response) {
+        // Request was made and server responded with an error status code
+        const errorMessage = error.response.data.message;
+        Alert.alert('Error', errorMessage);
+      } else if (error.request) {
+        // The request was made but no response was received
+        Alert.alert('Error', 'No response from the server. Please try again.');
+      } else {
+        // Other error occurred
+        Alert.alert('Error', 'Login failed. Please try again.');
+      }
+    }
+  };
 
   return (
     <SafeAreaView
@@ -67,8 +100,8 @@ const LoginScreen = () => {
             
           }}
         >
-          <AppTextInput placeholder="Email" inputMode="email-address" />
-          <AppTextInput placeholder="Password" inputMode='password'/>
+          <AppTextInput placeholder="Email" value={email} onChangeText={setEmail} inputMode="email-address"/>
+          <AppTextInput placeholder="Password" value={password} onChangeText={setPassword} inputMode='password'/>
         </View>
 
         <View>
@@ -84,7 +117,7 @@ const LoginScreen = () => {
           </Text>
         </View>
 
-        <TouchableOpacity
+        <TouchableOpacity onPress={handleLogin}
           style={{
             padding: Spacing*1.5,
             height:Spacing*6,
