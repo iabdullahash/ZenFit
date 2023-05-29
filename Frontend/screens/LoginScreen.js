@@ -53,7 +53,7 @@ const LoginScreen = () => {
       }
     }
   };
-
+  
   return (
     <SafeAreaView
     style={{

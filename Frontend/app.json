@@ -1,7 +1,9 @@
 {
   "expo": {
-    "name": "Frontend",
-    "slug": "Frontend",
+    "name": "ZenFit",
+    "slug": "myzenfitapp",
+    "scheme": "myzenfitapp",
+    "hostUri": "exp://localhost:19000",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
