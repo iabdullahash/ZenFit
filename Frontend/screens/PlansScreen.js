@@ -6,7 +6,8 @@ import Colors from '../constants/Colors';
 import Spacing from '../constants/Spacing';
 import Fonts from '../constants/Fonts';
 import FontSize from '../constants/FontSize';
-// 
+import api from "../config/api/index"
+
 const Stack = createStackNavigator();
 
 
@@ -17,8 +18,9 @@ const PlansScreen = () => {
 
   const fetchMealPlans = async () => {
     try {
-      const response = await fetch('http://192.168.100.56:5000/api/meal_plans');
-      const data = await response.json();
+      const response = await api.get('/meal_plans');
+      // console.log(response.data)
+      const data = await response.data;
       setMealPlans(data);
     } catch (error) {
       console.error('Error fetching meal plans:', error);
@@ -27,8 +29,8 @@ const PlansScreen = () => {
 
   const fetchWorkoutPlans = async () => {
     try {
-      const response = await fetch('http://192.168.100.56:5000/api/workout_plans');
-      const data = await response.json();
+      const response = await api.get('/workout_plans');
+      const data = await response.data;
       setWorkoutPlans(data);
     } catch (error) {
       console.error('Error fetching workout plans:', error);

@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS
+from extras import calculate_calorie_intake
 import json
 
 app = Flask(__name__)
-CORS(app)
+
 
 #--------------------------------------------------- MAIN JSON SAVE/LOAD ---------------------------------------------------
 
@@ -65,7 +65,9 @@ def signup():
             return jsonify({'message': 'Email already exists'}), 400
 
     # Create a new user and add it to the database
-    new_user = {'name':name,'email': email, 'password': password}
+    calorie_intake = calculate_calorie_intake(gender, age, height, weight)
+    goals = {"requiredCalories": calorie_intake, "dailyStepsGoal": 10000, "dailyCalorieBurnGoal": 880}
+    new_user = {'name':name,'email': email, 'password': password,"weight": weight,"height": height,'age': age,'goals': goals,"googleAuthKey":'',"activity":{}}
     users.append(new_user)
     data['users'] = users
     save_data(data)

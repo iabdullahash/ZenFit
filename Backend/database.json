@@ -4,12 +4,14 @@
             "name": "Maaz Siddiqui",
             "email": "yourdaddy257@gmail.com",
             "password": "googleisgay123",
+            "gender": "Male",
             "weight": 44,
             "height": 160,
             "age": 20,
             "goals": {
                 "requiredCalories": 5000,
-                "dailyStepsGoal": 100
+                "dailyStepsGoal": 10000,
+                "dailyCalorieBurnGoal": 880
             },
             "googleAuthKey": "1234567890",
             "activity": {
@@ -48,6 +50,7 @@
             "name":"user2",
             "email": "user2@example.com",
             "password": "password2",
+            "gender": "Female",
             "weight": 65,
             "height": 165,
             "age": 30,
@@ -83,12 +86,8 @@
                     "calories": 150
                 }
             ]
-        },
-        {
-            "name": "Ash",
-            "email": "asdfghj@gmail.com",
-            "password": "1234567"
         }
+ 
     ],
     "workoutPlans": [
         {
