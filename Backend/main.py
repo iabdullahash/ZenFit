@@ -97,6 +97,39 @@ def get_workout_plans():
     return jsonify(workout_plans)
 
 
+#--------------------------------------Password Change--------------------------------
+
+@app.route("/api/pass_chg",methods=['GET','POST'])
+def pass_chg():
+    old = request.json.get('old_password')
+    new = request.json.get('new_password')
+    confirm = request.json.get('confirm_password')
+
+    data = load_data()
+    users = data.get('users', [])
+
+    for user in users :
+        if user['email'] == "yourdaddy257@gmail.com":
+            if user['password'] == old:
+                if new == confirm:
+
+                    user['password'] = new
+                    save_data(user)
+                                
+                    return jsonify({'message': 'Password changed successfully'})
+
+                else:
+                    return jsonify({'Error': 'Password not same'}) ,404
+            else:
+                return jsonify({'Error': 'Incorrect Old Password'}) ,404
+                
+
+    
+
+            
+                
+
+
 
 
 if __name__ == '__main__':

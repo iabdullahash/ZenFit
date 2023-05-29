@@ -10,6 +10,7 @@ import {
     Image
   } from "react-native";
   import React from "react";
+  import {useState} from "react";
   import { useNavigation } from '@react-navigation/native';
   import { createStackNavigator } from '@react-navigation/stack';
   import Spacing from "../constants/Spacing";
@@ -18,6 +19,7 @@ import {
   import Font from "../constants/Fonts";
   import { Ionicons } from "@expo/vector-icons";
   import AppTextInput from "../components/AppTextInput";
+  import api from "../config/api/index"
  
   
   
@@ -49,13 +51,14 @@ import {
         <View style={{
           flex:1,
           alignitems:'center',
-          marginBottom: 10,
+          marginTop:15,
           padding: 16,
           width: '100%',
           height: 70,
           backgroundColor: Colors.background,
           borderBottomWidth: 1,
           borderBottomColor: 'lightgray',
+          // paddingBottom:Spacing*1
         }}>
 
           <Text style={{
@@ -89,46 +92,18 @@ import {
                 paddingHorizontal: Spacing * 2,
                 paddingTop: Spacing * 8,
                 paddingBottom: Spacing * 5,
-                // alignItems: 'flex-start',
-            //     paddingHorizontal: Spacing * 2,
-            //     paddingTop: Spacing * 10,
-            //     width:'100%',
-            //     position: 'absolute',
-            //     top: 0,
-            //     left: 0,
-            //     padding: 16,
+              }
             }
-          }
         
         >
           <Text
-              style={styles.title
-              //   {
-              //     fontSize: FontSize.xLarge,
-              //     color: Colors.primary,
-              //     top: 0,
-              //     left: 0,
-              //     fontFamily: Font["poppins-bold"],
-              //     // textAlign: "center",
-              //     marginBottom: Spacing*4
-              // }
-            }
+              style={styles.title}
           >
               Profile
 
           </Text>
           <View
-            style={styles.infoContainer
-            //   {
-            //   paddingTop: Spacing*2,
-            //   flexDirection: 'row',
-            //   // justifyContent:'space-between',
-            //   alignItems:'center',
-
-
-
-            // }
-          }
+            style={[styles.infoContainer,{paddingBottom:Spacing*1,paddingTop:Spacing*2}]}
           >
 
               <Image
@@ -176,43 +151,17 @@ import {
 
         <ScrollView contentContainerStyle={styles.scrollViewContainer}>
           <View
-              style={ styles.contentContainer
-              //     paddingHorizontal: Spacing * 2,
-              //     paddingTop: Spacing * 8,
-              //     width:'100%',
-              //     position: 'absolute',
-              //     top: 0,
-              //     left: 0,
-              //     padding: 16,
-              }
+              style={ styles.contentContainer}
           
           >
             <Text
-                style={ styles.title
-                //   {
-                //     fontSize: FontSize.xLarge,
-                //     color: Colors.primary,
-                //     top: 0,
-                //     left: 0,
-                //     fontFamily: Font["poppins-bold"],
-                //     // textAlign: "center",
-                //     marginBottom: Spacing*3
-                // }
-              }
+                style={ styles.title }
             >
                 Personal Information
 
             </Text>
             <View
-              style={ styles.infoContainer
-              //   {
-              //   flexDirection: 'row',
-              //   // justifyContent:'space-between',
-              //   alignItems:'center',
-
-
-              // }
-            }
+              style={ styles.infoContainer}
             >
 
                 <Image
@@ -303,15 +252,7 @@ import {
               </View>
             </View>
             <View
-              style={styles.buttonContainer
-              //   {
-              //   flexDirection: 'row',
-              //   justifyContent:'space-between',
-              //   alignItems:'center',
-
-
-              // }
-            }
+              style={styles.buttonContainer}
             
             >
               <TouchableOpacity
@@ -328,14 +269,7 @@ import {
             }
           >
             <Text
-              style={styles.saveButtonText
-              //   {
-              //   fontFamily: Font["poppins-bold"],
-              //   color: Colors.onPrimary,
-              //   textAlign: "center",
-              //   fontSize: FontSize.medium,
-              // }
-            }
+              style={styles.saveButtonText}
             >
               Save Changes
             </Text>
@@ -353,6 +287,43 @@ import {
   const Password_chg = () =>{
 
     const navigation = useNavigation();
+    const [old_pass, set_old_pass] = useState('');
+    const [new_pass, set_new_pass] = useState('');
+    const [confirm_pass, set_confirm_pass] = useState('');
+
+    const pass_chng = async () => {
+      try {
+        const response = await api.post('/pass_chg', {
+          old_password: old_pass,
+          new_password: new_pass,
+          confirm_password: confirm_pass
+        });
+    
+        if (response.status === 200) {
+          // Password updated successfully
+          console.log(response.data);
+          navigation.navigate('Profile_');
+        } else {
+          // Other error occurred
+          const data = response.data;
+          console.log('Password change failed');
+          Alert.alert('Error', 'Password change failed. Please try again.');
+        }
+      } catch (error) {
+        if (error.response) {
+          // Request was made and server responded with an error status code
+          const errorMessage = error.response.data.message;
+          Alert.alert('Error', errorMessage);
+        } else if (error.request) {
+          // The request was made but no response was received
+          Alert.alert('Error', 'No response from the server. Please try again.');
+        } else {
+          // Other error occurred
+          Alert.alert('Error', 'Password change failed. Please try again.');
+        }
+      }
+    };
+
     
     return (
       <SafeAreaView
@@ -362,45 +333,17 @@ import {
         }}>
         
         <View
-            style={styles.contentContainer
-            //   {
-            //     paddingHorizontal: Spacing * 2,
-            //     paddingTop: Spacing * 8,
-            //     width:'100%',
-            //     position: 'absolute',
-            //     top: 0,
-            //     left: 0,
-            //     padding: 16,
-            // }
-          }
+            style={styles.contentContainer}
         
         >
           <Text
-              style={styles.title
-              //   {
-              //     fontSize: FontSize.xLarge,
-              //     color: Colors.primary,
-              //     top: 0,
-              //     left: 0,
-              //     fontFamily: Font["poppins-bold"],
-              //     // textAlign: "center",
-              //     marginBottom: Spacing*3
-              // }
-            }
+              style={styles.title}
           >
               Security & Password
 
           </Text>
           <View
-            style={styles.infoContainer
-            //   {
-            //   flexDirection: 'row',
-            //   // justifyContent:'space-between',
-            //   alignItems:'center',
-
-
-            // }
-          }
+            style={styles.infoContainer}
           >
 
               <Image
@@ -441,7 +384,7 @@ import {
               Old Password
             </Text>
 
-            <AppTextInput placeholder="Password" inputMode="email-address" />
+            <AppTextInput placeholder="Password" inputMode="email-address" value={old_pass} onChangeText={set_old_pass} />
 
 
             </View>
@@ -453,7 +396,7 @@ import {
               New Password
             </Text>
 
-            <AppTextInput placeholder="" inputMode="email-address" />
+            <AppTextInput placeholder="New Password" inputMode="email-address" value={new_pass} onChangeText={set_new_pass} />
 
 
             </View>
@@ -465,7 +408,7 @@ import {
               Confirm Password
             </Text>
 
-            <AppTextInput placeholder="" inputMode="email-address" />
+            <AppTextInput placeholder="Confirm Password" inputMode="email-address" value={confirm_pass} onChangeText={set_confirm_pass} />
 
 
             </View>
@@ -473,15 +416,7 @@ import {
 
           </View>
           <View
-            style={styles.buttonContainer
-            //   {
-            //   flexDirection: 'row',
-            //   justifyContent:'space-between',
-            //   alignItems:'center',
-            //   paddingTop: Spacing*3,
-
-            // }
-          }
+            style={styles.buttonContainer}
           >
             <TouchableOpacity
           style={styles.backButton}
@@ -490,7 +425,7 @@ import {
         </TouchableOpacity>
         
         <TouchableOpacity
-          style={styles.saveButton}
+          style={styles.saveButton} onPress={pass_chng}
         >
           <Text
             style={{
@@ -524,45 +459,17 @@ import {
         flex:1,
         }}>
         <View
-            style={styles.contentContainer
-            //   {
-            //     paddingHorizontal: Spacing * 2,
-            //     paddingTop: Spacing * 8,
-            //     width:'100%',
-            //     position: 'absolute',
-            //     top: 0,
-            //     left: 0,
-            //     padding: 16,
-            // }
-          }
+            style={styles.contentContainer}
         
         >
           <Text
-              style={styles.title
-              //   {
-              //     fontSize: FontSize.xLarge,
-              //     color: Colors.primary,
-              //     top: 0,
-              //     left: 0,
-              //     fontFamily: Font["poppins-bold"],
-              //     // textAlign: "center",
-              //     marginBottom: Spacing*3
-              // }
-            }
+              style={styles.title}
           >
               Goals
 
           </Text>
           <View
-            style={styles.infoContainer
-            //   {
-            //   flexDirection: 'row',
-            //   // justifyContent:'space-between',
-            //   alignItems:'center',
-
-
-            // }
-          }
+            style={styles.infoContainer}
           >
 
               <Image
@@ -586,7 +493,6 @@ import {
           <View
            style = {{
             flexDirection: 'column',
-            // alignItems: 'center',
             
 
            }}
@@ -649,15 +555,7 @@ import {
 
           </View>
           <View
-            style={styles.buttonContainer
-            //   {
-            //   flexDirection: 'row',
-            //   justifyContent:'space-between',
-            //   alignItems:'center',
-            //   paddingTop: Spacing*3,
-
-            // }
-          }
+            style={styles.buttonContainer}
           >
             <TouchableOpacity
           style={styles.backButton}
@@ -769,38 +667,7 @@ import {
       fontSize: FontSize.small,
       color: Colors.primary,
       fontFamily: Font["poppins-regular"]},
-      
-      
 
-    // },
-    // per_info_btn_back:{
-    //   padding: Spacing*1.5,
-    //   height:Spacing*6,
-    //   backgroundColor: Colors.primary,
-    //   marginVertical: Spacing * 1,
-    //   borderRadius: Spacing,
-    //   shadowColor: Colors.primary,
-    //   shadowOffset: {
-    //     width: 0,
-    //     height: Spacing,
-    //   },
-    //   shadowOpacity: 0.3,
-    //   shadowRadius: Spacing,
-    // },
-    // per_info_btn_save:{
-    //   padding: Spacing*1.5,
-    //   height:Spacing*6,
-    //   backgroundColor: '#878585',
-    //   marginVertical: Spacing * 1,
-    //   borderRadius: Spacing,
-    //   shadowColor: Colors.primary,
-    //   shadowOffset: {
-    //     width: 0,
-    //     height: Spacing,
-    //   },
-    //   shadowOpacity: 0.3,
-    //   shadowRadius: Spacing,
-    // }
 
   });
 
