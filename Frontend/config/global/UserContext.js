@@ -10,7 +10,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const clearUserContext = () => {
-    setUser(null);
+    setUserData(null);
   };
 
   return (

@@ -19,7 +19,9 @@ import {
   import Font from "../constants/Fonts";
   import { Ionicons } from "@expo/vector-icons";
   import AppTextInput from "../components/AppTextInput";
-  import api from "../config/api/index"
+  import api from "../config/api/index";
+  import {useContext} from 'react';
+  import { UserContext } from '../config/global/UserContext';
  
   
   
@@ -35,6 +37,11 @@ import {
   const ProfileScreen = () => {
   
     const navigation = useNavigation();
+    const { userData , clearUserContext } = useContext(UserContext);
+    const handleLogout = () => {
+      // clearUserContext();
+      // navigation.navigate('Welcome');
+    };
 
 //------------------------------------------------------Flat list-----------------------------------------
     const Flat_data = [
@@ -117,7 +124,8 @@ import {
                   fontFamily: Font["poppins-regular"],
                 }}
               >
-                Holy Cow
+                {/* {userData.name} */}
+                HOLY MOLY JESUS CROSS
                   
 
               </Text>
@@ -128,6 +136,22 @@ import {
             renderItem = {Render_flat_item}
             keyExtractor={(item) => item.id}
           />
+          <View>
+          <TouchableOpacity
+          style={styles.Logout_btn} onPress={handleLogout}
+        >
+          <Text
+            style={{
+              fontFamily: Font["poppins-bold"],
+              color: Colors.onPrimary,
+              textAlign: "center",
+              fontSize: FontSize.medium,
+            }}
+          >
+            Log Out
+          </Text>
+        </TouchableOpacity>
+          </View>
 
         </View>
         
@@ -140,6 +164,7 @@ import {
     const Personal_info = () =>{
 
       const navigation = useNavigation();
+      const { userData } = useContext(UserContext);
       
       return (
         <SafeAreaView
@@ -203,7 +228,7 @@ import {
                 Name
               </Text>
 
-              <AppTextInput placeholder="Holy Cow" value={user} inputMode="email-address" />
+              <AppTextInput placeholder="Holy Cow" value={userData.name} inputMode="email-address" />
 
 
               </View>
@@ -215,7 +240,7 @@ import {
                 E-Mail
               </Text>
 
-              <AppTextInput placeholder="holycow@farm.com" inputMode="email-address" />
+              <AppTextInput placeholder="holycow@farm.com" value={userData.email} inputMode="email-address" />
 
 
               </View>
@@ -226,7 +251,7 @@ import {
                 Age
               </Text>
 
-              <AppTextInput placeholder="21" inputMode="number-pad" />
+              <AppTextInput placeholder="21" value={userData.age.toString()} inputMode="number-pad" />
 
 
               </View>
@@ -237,7 +262,7 @@ import {
                 Height
               </Text>
 
-              <AppTextInput placeholder="180.34 cm" inputMode="number-pad" />
+              <AppTextInput placeholder="180.34 cm" value={userData.height.toString() + " cm"} inputMode="number-pad" />
 
 
               </View>
@@ -248,7 +273,7 @@ import {
                 Weight
               </Text>
 
-              <AppTextInput placeholder="68 kg" inputMode="number-pad" />
+              <AppTextInput placeholder="68 kg" value={userData.weight.toString() + " kg"} inputMode="number-pad" />
               </View>
             </View>
             <View
@@ -287,6 +312,7 @@ import {
   const Password_chg = () =>{
 
     const navigation = useNavigation();
+    const { userData } = useContext(UserContext);
     const [old_pass, set_old_pass] = useState('');
     const [new_pass, set_new_pass] = useState('');
     const [confirm_pass, set_confirm_pass] = useState('');
@@ -667,6 +693,21 @@ import {
       fontSize: FontSize.small,
       color: Colors.primary,
       fontFamily: Font["poppins-regular"]},
+
+      Logout_btn: {
+        padding: Spacing * 1.5,
+        height: Spacing * 6,
+        backgroundColor: 'red',
+        marginVertical: Spacing * 5,
+        borderRadius: Spacing,
+        shadowColor: Colors.primary,
+        shadowOffset: {
+          width: 0,
+          height: Spacing,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: Spacing,
+      },
 
 
   });
