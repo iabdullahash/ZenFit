@@ -10,12 +10,13 @@ def calculate_calorie_intake(gender,age, height, weight):
         weight_kg = weight['amount'] * 0.45359237
     else:
         weight_kg = weight["amount"]
+    
     # Calculate the BMR (Basal Metabolic Rate)
     bmr = 0
     if gender == 'Male':
-        bmr = MALE_CONSTANT + (WEIGHT_MULTIPLIER * weight_kg) + (HEIGHT_MULTIPLIER * height) - (AGE_MULTIPLIER * age)
+        bmr = MALE_CONSTANT + (WEIGHT_MULTIPLIER * float(weight_kg)) + (HEIGHT_MULTIPLIER * height) - (AGE_MULTIPLIER * age)
     elif gender == 'Female':
-        bmr = FEMALE_CONSTANT + (WEIGHT_MULTIPLIER * weight_kg) + (HEIGHT_MULTIPLIER * height) - (AGE_MULTIPLIER * age)
+        bmr = FEMALE_CONSTANT + (WEIGHT_MULTIPLIER * float(weight_kg)) + (HEIGHT_MULTIPLIER * height) - (AGE_MULTIPLIER * age)
 
     # Calculate the daily calorie intake based on activity level
     activity_level = 1.2  #(little to no exercise)
@@ -23,4 +24,6 @@ def calculate_calorie_intake(gender,age, height, weight):
 
     return int(calorie_intake)
 
-# print(calculate_calorie_intake("male",19,168,{"amount":58,"unit":'kg'}))
+# print(calculate_calorie_intake("Male",19,168,{"amount":58,"unit":'lbs'}))
+
+

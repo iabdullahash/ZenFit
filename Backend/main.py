@@ -48,6 +48,7 @@ def login():
 @app.route('/api/signup', methods=['POST'])
 def signup():
     details = request.json.get('data')
+    print(details)
     name = details['name']
     email = details['email']
     password = details['password']
@@ -55,7 +56,7 @@ def signup():
     age = details['age']
     height = details['height']
     weight = details['weight']
-
+    
     data = load_data()
     users = data.get('users', [])
 
@@ -65,9 +66,9 @@ def signup():
             return jsonify({'message': 'Email already exists'}), 400
 
     # Create a new user and add it to the database
-    calorie_intake = calculate_calorie_intake(gender, age, height, weight)
+    calorie_intake = calculate_calorie_intake(gender, int(age), int(height), weight)
     goals = {"requiredCalories": calorie_intake, "dailyStepsGoal": 10000, "dailyCalorieBurnGoal": 880}
-    new_user = {'name':name,'email': email, 'password': password,"weight": weight,"height": height,'age': age,'goals': goals,"googleAuthKey":'',"activity":{}}
+    new_user = {'name':name,'email': email, 'password': password,"weight": weight,"height": height,'age': age,'goals': goals,"googleAuthKey":'',"meals": {"breakfast":[],"lunch":[],"dinner":[],"snack":[]}}
     users.append(new_user)
     data['users'] = users
     save_data(data)

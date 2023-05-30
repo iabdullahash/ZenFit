@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Modal, Pressable } from 'react-native';
+import { UserContext } from '../config/global/UserContext';
 import Colors from '../constants/Colors';
 import Spacing from '../constants/Spacing';
 import Fonts from '../constants/Fonts';
@@ -7,19 +8,27 @@ import FontSize from '../constants/FontSize';
 
 
 const DiaryScreen = () => {
+  const { userData } = useContext(UserContext);
+
   const [breakfastItems, setBreakfastItems] = useState([]);
   const [lunchItems, setLunchItems] = useState([]);
   const [dinnerItems, setDinnerItems] = useState([]);
   const [snackItems, setSnackItems] = useState([]);
   const [selectedMealItem, setSelectedMealItem] = useState(null);
+  const [selectedMealItemInfo, setSelectedMealItemInfo] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [infoModalVisible, setInfoModalVisible] = useState(false);
+
 
   const handleAddItem = (mealType) => {
     // Generate a random meal item
     const mealItem = {
       name: "Example Meal",
-      quantity: "1 serving",
+      quantity: 1,
       calories: 350,
+      proteins: 20,
+      carbs: 30,
+      fats: 10,
     };
 
     // Add the meal item to the respective meal array based on the meal type
@@ -47,7 +56,9 @@ const DiaryScreen = () => {
 
 
   const handleConfirmDelete = (mealType, index) => {
+    const mealItem = getMealItemByType(mealType, index);
     setSelectedMealItem({ mealType, index });
+    setSelectedMealItemInfo(mealItem);
     setModalVisible(true);
   };
 
@@ -84,38 +95,117 @@ const DiaryScreen = () => {
       }
       setModalVisible(false); // Close the modal
     };
-
-  const renderMealItem = (mealType, mealItems) => {
   
-    return (
-      <View style={styles.mealSection}>
-        <View style={styles.mealBorder}>
-          <Text style={styles.mealTitle}>{mealType}</Text>
-          <Text style={styles.mealTitle}>0</Text>
-        </View>
-        <View style={{ ...styles.separator, marginBottom: Spacing, height: 1 }} />
-        {mealItems.map((item, index) => (
+  const getMealItemByType = (mealType, index) => {
+      let mealItems;
+      switch (mealType) {
+        case "Breakfast":
+          mealItems = breakfastItems;
+          break;
+        case "Lunch":
+          mealItems = lunchItems;
+          break;
+        case "Dinner":
+          mealItems = dinnerItems;
+          break;
+        case "Snacks":
+          mealItems = snackItems;
+          break;
+        default:
+          return null;
+      }
+      return mealItems[index];
+    };
+  
+    
+    const renderMealItem = (mealType, mealItems) => {
+      const totalCalories = mealItems.reduce((sum, item) => sum + item.calories, 0);
+    
+      const handleOpenModal = (item) => {
+        setSelectedMealItemInfo(item);
+        setInfoModalVisible(true);
+      };
+
+      const handleCloseModal = () => {
+        setInfoModalVisible(false);
+      };
+    
+      return (
+        <View style={styles.mealSection}>
+          <View style={styles.mealBorder}>
+            <Text style={styles.mealTitle}>{mealType}</Text>
+            <Text style={styles.mealTitle}>{totalCalories}</Text>
+          </View>
+          <View style={{ ...styles.separator, marginBottom: Spacing, height: 1 }} />
+          {mealItems.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.mealItemContainer}
+              onLongPress={() => handleConfirmDelete(mealType, index)}
+              onPress={() => handleOpenModal(item)}
+            >
+              <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                <Text style={styles.mealItemName}>{item.name}</Text>
+                <Text style={styles.mealItemDescription}>{item.quantity} serving</Text>
+              </View>
+              <Text style={styles.mealItemCalories}>{item.calories} Cal</Text>
+            </TouchableOpacity>
+          ))}
           <TouchableOpacity
-            key={index}
-            style={styles.mealItemContainer}
-            onLongPress={() => handleConfirmDelete(mealType, index)}
+            style={styles.addButton}
+            onPress={() => handleAddItem(mealType)}
           >
-            <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-              <Text style={styles.mealItemName}>{item.name}</Text>
-              <Text style={styles.mealItemDescription}>{item.quantity}</Text>
-            </View>
-            <Text style={styles.mealItemCalories}>{item.calories} Cal</Text>
+            <Text style={styles.addButtonText}>+ Add Item</Text>
           </TouchableOpacity>
-        ))}
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => handleAddItem(mealType)}
-        >
-          <Text style={styles.addButtonText}>+ Add Item</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    
+          <Modal
+            visible={infoModalVisible}
+            animationType="fade"
+            transparent={true}
+            onRequestClose={handleCloseModal}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                {selectedMealItemInfo && (
+                  <>
+                    <Text style={styles.modalTitle}>{selectedMealItemInfo.name}</Text>
+                    <Text style={styles.modelinfotext}>Proteins:    <Text style={styles.modelinfotextspan}>{selectedMealItemInfo.proteins} g</Text></Text>
+                    <Text style={styles.modelinfotext}>Carbs:    <Text style={styles.modelinfotextspan}>{selectedMealItemInfo.carbs} g</Text></Text>
+                    <Text style={styles.modelinfotext}>Fats:    <Text style={styles.modelinfotextspan}>{selectedMealItemInfo.fats} g</Text></Text>
+                    <Text style={styles.modelinfotext}>Total Calories:    <Text style={styles.modelinfotextspan}>{selectedMealItemInfo.calories} g</Text></Text>
+                  </>
+                )}
+                <TouchableOpacity
+                  style={styles.closeButton}
+                  onPress={handleCloseModal}
+                >
+                  <Text style={styles.closeButtonText}>Close</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+        </View>
+      );
+    };
+    
+
+  const getTotalCalories = () => {
+    const breakfastCalories = breakfastItems.reduce((sum, item) => sum + item.calories, 0);
+    const lunchCalories = lunchItems.reduce((sum, item) => sum + item.calories, 0);
+    const dinnerCalories = dinnerItems.reduce((sum, item) => sum + item.calories, 0);
+    const snackCalories = snackItems.reduce((sum, item) => sum + item.calories, 0);
+
+    return breakfastCalories + lunchCalories + dinnerCalories + snackCalories;
   };
+
+  const getRemainingCalories = () => {
+    const goalCalories = userData.goals.requiredCalories; 
+    const foodCalories = getTotalCalories();
+    const exerciseCalories = 0; 
+
+    return goalCalories - foodCalories + exerciseCalories;
+  };
+
   return (
     <SafeAreaView style={{
       backgroundColor: Colors.background,
@@ -128,14 +218,14 @@ const DiaryScreen = () => {
         <Text style={{ ...styles.mealTitle, borderBottomWidth: 0 }}>Calories Remaining</Text>
         <View style={styles.calorieSection}>
           <View style={styles.calorieCalculation}>
-            <Text style={styles.calorieText}>2,754</Text>
+            <Text style={styles.calorieText}>{userData.goals.requiredCalories}</Text>
             <Text style={styles.calorieTextspan}>Goal</Text>
           </View>
 
           <Text style={{ ...styles.calorieText, fontSize: FontSize.large, paddingBottom: Spacing * 1.4 }}>-</Text>
 
           <View style={styles.calorieCalculation}>
-            <Text style={styles.calorieText}>0</Text>
+            <Text style={styles.calorieText}>{getTotalCalories()}</Text>
             <Text style={styles.calorieTextspan}>Food</Text>
           </View>
 
@@ -149,7 +239,7 @@ const DiaryScreen = () => {
           <Text style={{ ...styles.calorieText, fontSize: FontSize.large, paddingBottom: Spacing * 1.4 }}>=</Text>
 
           <View style={styles.calorieCalculation}>
-            <Text style={{ ...styles.calorieText, fontSize: FontSize.large, fontFamily: Fonts["poppins-bold"] }}>2754</Text>
+            <Text style={{ ...styles.calorieText, fontSize: FontSize.large, fontFamily: Fonts["poppins-bold"] }}>{getRemainingCalories()}</Text>
             <Text style={styles.calorieTextspan}>Remaining</Text>
           </View>
         </View>
@@ -309,7 +399,7 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontFamily: Fonts['poppins-bold'],
-    fontSize: FontSize.medium,
+    fontSize: FontSize.large,
     color: Colors.primary,
     marginBottom: Spacing * 1.2,
   },
@@ -343,6 +433,27 @@ const styles = StyleSheet.create({
     fontFamily: Fonts['poppins-bold'],
     fontSize: FontSize.small,
     color: Colors.background,
+  },
+  modelinfotext: {
+    fontFamily: Fonts['poppins-semiBold'],
+    fontSize: FontSize.medium,
+    color:Colors.onPrimary,
+    marginVertical:Spacing*0.5
+  },
+  modelinfotextspan: {
+    fontFamily: Fonts['poppins-regular'],
+    fontSize: FontSize.small,
+    color:Colors.primary
+  },
+
+  closeButton: {
+    alignSelf: 'flex-end',
+    marginTop: Spacing * 1.2,
+  },
+  closeButtonText: {
+    fontFamily: Fonts['poppins-bold'],
+    fontSize: FontSize.small,
+    color: Colors.primary,
   },
 });
 

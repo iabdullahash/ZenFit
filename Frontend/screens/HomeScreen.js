@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView ,Dimensions} from 'react-native';
+import { UserContext } from '../config/global/UserContext';
 import Colors from "../constants/Colors"
 import Spacing from '../constants/Spacing';
 import FontSize from '../constants/FontSize';
@@ -12,6 +13,7 @@ import { BarChart, LineChart } from 'react-native-chart-kit';
 const HomeScreen = () => {
   
   const navigation = useNavigation();
+  const { userData } = useContext(UserContext);
   const width = Dimensions.get('window').width
   const chartData = {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -44,7 +46,7 @@ const HomeScreen = () => {
           <Image source={require('../assets/images/cow.jpg')} style={styles.profileImage} />
           <View style={styles.profileTextContainer}>
             <Text style={styles.profileText}>Hello</Text>
-            <Text style={styles.profileName}>Abdullah Ash</Text>
+            <Text style={styles.profileName}>{userData.name}</Text>
           </View>
         </View>
         <View>
@@ -61,7 +63,7 @@ const HomeScreen = () => {
 
           <View style={{flexDirection:'column',justifyContent:'center'}}>
             <Text style={styles.targetTitle}>Total calories</Text>
-            <Text style={styles.targetValue}>500 <Text style={styles.calText}>cal</Text></Text>
+            <Text style={styles.targetValue}>{userData.goals.dailyCalorieBurnGoal} <Text style={styles.calText}>cal</Text></Text>
           </View>
 
           <Image source={require('../assets/images/fire.png')} style={styles.targetIcon} />
@@ -77,7 +79,7 @@ const HomeScreen = () => {
 
           <View style={{flexDirection:'column',justifyContent:'center'}}>
             <Text style={styles.targetTitle}>Total steps</Text>
-            <Text style={styles.targetValue}>10000</Text>
+            <Text style={styles.targetValue}>{userData.goals.dailyStepsGoal}</Text>
           </View>
 
           <Image source={require('../assets/images/running.png')} style={styles.targetIcon} />

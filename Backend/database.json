@@ -14,26 +14,6 @@
                 "dailyCalorieBurnGoal": 880
             },
             "googleAuthKey": "1234567890",
-            "activity": {
-                "stepCount": [
-                    5000,
-                    6000,
-                    8000,
-                    9000,
-                    7500,
-                    10000,
-                    12000
-                ],
-                "caloriesBurnt": [
-                    250,
-                    300,
-                    400,
-                    450,
-                    375,
-                    500,
-                    600
-                ]
-            },
             "meals": [
                 {
                     "food": "Chicken Breast",
@@ -46,8 +26,8 @@
                 }
             ]
         },
-        {   
-            "name":"user2",
+        {
+            "name": "user2",
             "email": "user2@example.com",
             "password": "password2",
             "gender": "Female",
@@ -86,8 +66,32 @@
                     "calories": 150
                 }
             ]
+        },
+        {
+            "name": "Abdullah",
+            "email": "abcd@gmail.com",
+            "password": "12345678",
+            "weight": {
+                "amount": "59",
+                "unit": "kg"
+            },
+            "height": "166",
+            "age": "18",
+            "goals": {
+                "requiredCalories": 1903,
+                "dailyStepsGoal": 10000,
+                "dailyCalorieBurnGoal": 880
+            },
+            "googleAuthKey": "",
+              "meals": 
+                  {"breakfast":[],
+                  "lunch":[],
+                  "dinner":[],
+                  "snack":[]
+              }
+
+            
         }
- 
     ],
     "workoutPlans": [
         {

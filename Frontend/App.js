@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { UserProvider } from './config/global/UserContext';
 import MainScreen from './screens/MainScreen';
 import LoginScreen from './screens/LoginScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -20,6 +21,7 @@ const App = () => {
   }
 
   return (
+    <UserProvider>
     <NavigationContainer>
       <View style={styles.container}>
       
@@ -36,6 +38,7 @@ const App = () => {
         <StatusBar style="light" />
       </View>
     </NavigationContainer>
+    </UserProvider>
   );
 };
 

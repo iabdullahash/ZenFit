@@ -203,7 +203,7 @@ import {
                 Name
               </Text>
 
-              <AppTextInput placeholder="Holy Cow" inputMode="email-address" />
+              <AppTextInput placeholder="Holy Cow" value={user} inputMode="email-address" />
 
 
               </View>

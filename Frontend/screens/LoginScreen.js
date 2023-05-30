@@ -7,8 +7,9 @@ import {
   View,
   Alert
 } from "react-native";
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../config/global/UserContext';
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
@@ -24,15 +25,16 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { updateUser } = useContext(UserContext);
 
   const handleLogin = async () => {
     try {
       const response = await api.post('/login', { email, password });
-  
+      console.log(response.data)
       if (response.status === 200) {
         // Successful login
         const data = response.data;
-        console.log(data);
+        updateUser(data.result);
         navigation.navigate('Main');
       } else {
         // Other error occurred
