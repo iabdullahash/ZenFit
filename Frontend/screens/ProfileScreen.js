@@ -7,7 +7,8 @@ import {
     View,
     FlatList,
     ScrollView,
-    Image
+    Image,
+    Alert
   } from "react-native";
   import React from "react";
   import {useState} from "react";
@@ -124,8 +125,8 @@ import {
                   fontFamily: Font["poppins-regular"],
                 }}
               >
-                {/* {userData.name} */}
-                HOLY MOLY JESUS CROSS
+                {userData.name}
+                
                   
 
               </Text>
@@ -164,7 +165,55 @@ import {
     const Personal_info = () =>{
 
       const navigation = useNavigation();
-      const { userData } = useContext(UserContext);
+      const { userData , updateUser } = useContext(UserContext);
+      const [name_chg , setname_chg] = useState(userData.name)
+      const [email_chg , setemail_chg] = useState(userData.email)
+      const [age_chg , setage_chg] = useState(userData.age.toString())
+      const [height_chg , setheight_chg] = useState(userData.height.toString())
+      const [weight_chg , setweight_chg] = useState(userData.weight.amount)
+
+      const info_chng = async () => {
+        try {
+          const response = await api.post('/info_chg', {
+            user_email: userData.email,
+            name_chg,
+            email_chg,
+            age_chg,
+            height_chg,
+            weight_chg,
+
+          });
+      
+          if (response.status === 200) {
+            // Password updated successfully
+            console.log(response.data);
+            const data = response.data;
+            updateUser(data.result);
+            navigation.navigate('Profile_');
+          } else {
+            // Other error occurred
+            const data = response.data;
+            console.log('Password change failed');
+          
+          }
+        } catch (error) {
+          if (error.response) {
+            // Request was made and server responded with an error status code
+            const errorMessage = error.response.data.Error;
+            console.log(errorMessage)
+            Alert.alert(errorMessage)
+         
+          } else if (error.request) {
+            // The request was made but no response was received
+            const errorMessage = error.response.data.error;
+            console.log("response request baby")
+          } else {
+            // Other error occurred
+            const errorMessage = error.response.data.error;
+            console.log("don't know wtf is happening baby")
+          }
+        }
+      };
       
       return (
         <SafeAreaView
@@ -201,7 +250,7 @@ import {
                     
                   }}
                 >
-                  Holy Cow
+                  {userData.name}
                     
 
                 </Text>
@@ -228,7 +277,7 @@ import {
                 Name
               </Text>
 
-              <AppTextInput placeholder="Holy Cow" value={userData.name} inputMode="email-address" />
+              <AppTextInput placeholder="Holy Cow" value={name_chg} onChangeText={setname_chg} inputMode="email-address" />
 
 
               </View>
@@ -240,7 +289,7 @@ import {
                 E-Mail
               </Text>
 
-              <AppTextInput placeholder="holycow@farm.com" value={userData.email} inputMode="email-address" />
+              <AppTextInput placeholder="holycow@farm.com" value={email_chg} onChangeText={setemail_chg} inputMode="email-address" />
 
 
               </View>
@@ -251,7 +300,7 @@ import {
                 Age
               </Text>
 
-              <AppTextInput placeholder="21" value={userData.age.toString()} inputMode="number-pad" />
+              <AppTextInput placeholder="21" value={age_chg} onChangeText={setage_chg} inputMode="number-pad" />
 
 
               </View>
@@ -259,10 +308,10 @@ import {
               <Text
                 style = {styles.personal_txt}
               >
-                Height
+                Height (cm)
               </Text>
 
-              <AppTextInput placeholder="180.34 cm" value={userData.height.toString() + " cm"} inputMode="number-pad" />
+              <AppTextInput placeholder="180.34 cm" value={height_chg} onChangeText={setheight_chg} inputMode="number-pad" />
 
 
               </View>
@@ -270,10 +319,10 @@ import {
               <Text
                 style = {styles.personal_txt}
               >
-                Weight
+                Weight ({userData.weight.unit})
               </Text>
 
-              <AppTextInput placeholder="68 kg" value={userData.weight.toString() + " kg"} inputMode="number-pad" />
+              <AppTextInput placeholder="68 kg" value={weight_chg} onChangeText={setweight_chg} inputMode="number-pad" />
               </View>
             </View>
             <View
@@ -291,7 +340,7 @@ import {
           <TouchableOpacity
             style={styles.saveButton
               // styles.per_info_btn_save
-            }
+            } onPress={info_chng}
           >
             <Text
               style={styles.saveButtonText}
@@ -320,6 +369,7 @@ import {
     const pass_chng = async () => {
       try {
         const response = await api.post('/pass_chg', {
+          user_email: userData.email,
           old_password: old_pass,
           new_password: new_pass,
           confirm_password: confirm_pass
@@ -333,19 +383,23 @@ import {
           // Other error occurred
           const data = response.data;
           console.log('Password change failed');
-          Alert.alert('Error', 'Password change failed. Please try again.');
+        
         }
       } catch (error) {
         if (error.response) {
           // Request was made and server responded with an error status code
-          const errorMessage = error.response.data.message;
-          Alert.alert('Error', errorMessage);
+          const errorMessage = error.response.data.Error;
+          console.log(errorMessage)
+          Alert.alert(errorMessage)
+       
         } else if (error.request) {
           // The request was made but no response was received
-          Alert.alert('Error', 'No response from the server. Please try again.');
+          const errorMessage = error.response.data.error;
+          console.log("response request baby")
         } else {
           // Other error occurred
-          Alert.alert('Error', 'Password change failed. Please try again.');
+          const errorMessage = error.response.data.error;
+          console.log("don't know wtf is happening baby")
         }
       }
     };
@@ -383,7 +437,7 @@ import {
                   fontFamily: Font["poppins-regular"],
                 }}
               >
-                Holy Cow
+                {userData.name}
                   
 
               </Text>
@@ -477,6 +531,47 @@ import {
 
   const Goals = () =>{
     const navigation = useNavigation();
+    const { userData , updateUser } = useContext(UserContext);
+    const [calories_chg , setcalories_chg] = useState(userData.goals.dailyCalorieBurnGoal.toString())
+    const[steps_chg , setsteps_chg] = useState(userData.goals.dailyStepsGoal.toString())
+    const goal_chng = async () => {
+      try {
+        const response = await api.post('/calories_goal_chg', {
+          user_email: userData.email,
+          calories_chg,
+          steps_chg,
+        });
+    
+        if (response.status === 200) {
+          // Password updated successfully
+          console.log(response.data);
+          const data = response.data;
+          updateUser(data.result);
+          navigation.navigate('Profile_');
+        } else {
+          // Other error occurred
+          const data = response.data;
+          console.log('Password change failed');
+        
+        }
+      } catch (error) {
+        if (error.response) {
+          // Request was made and server responded with an error status code
+          const errorMessage = error.response.data.Error;
+          console.log(errorMessage)
+          Alert.alert(errorMessage)
+       
+        } else if (error.request) {
+          // The request was made but no response was received
+          const errorMessage = error.response.data.error;
+          console.log("response request baby")
+        } else {
+          // Other error occurred
+          const errorMessage = error.response.data.error;
+          console.log("don't know wtf is happening baby")
+        }
+      }
+    };
     
     return (
       <SafeAreaView
@@ -509,7 +604,7 @@ import {
                   fontFamily: Font["poppins-regular"],
                 }}
               >
-                Holy Cow
+                {userData.name}
                   
 
               </Text>
@@ -537,8 +632,8 @@ import {
                 color: Colors.primary,
                 fontFamily: Font["poppins-regular"],
               }}
-            >
-              10,000
+            > 
+              {userData.goals.dailyStepsGoal.toString()}
 
             </Text>
             </View>
@@ -550,7 +645,7 @@ import {
               Change steps
             </Text>
 
-            <AppTextInput placeholder="" inputMode="email-address" />
+            <AppTextInput placeholder="" value={steps_chg} onChangeText={setsteps_chg} inputMode="email-address" />
 
 
             </View>
@@ -558,7 +653,7 @@ import {
             <View>
             <Text
               style = {[styles.personal_txt,
-                {paddingTop: Spacing*2,
+                {paddingTop: Spacing*1,
                 paddingBottom:Spacing*2,}]}
             >
               Calories burnt
@@ -569,11 +664,26 @@ import {
                 fontSize: FontSize.xxLarge,
                 color: Colors.primary,
                 fontFamily: Font["poppins-regular"],
-                textAlign: 'center'
+                textAlign: 'center',
+              
+                paddingBottom:Spacing*2,
               }}
             >
-              ------
+              {userData.goals.dailyCalorieBurnGoal.toString()}
             </Text>
+
+            <View>
+            <Text
+              style = {styles.personal_txt}
+            >
+              Change calories burn
+
+            </Text>
+
+            <AppTextInput placeholder="" value={calories_chg} onChangeText={setcalories_chg} inputMode="email-address" />
+
+
+            </View>
 
 
             </View>
@@ -590,7 +700,7 @@ import {
         </TouchableOpacity>
         
         <TouchableOpacity
-          style={styles.saveButton}
+          style={styles.saveButton} onPress={goal_chng}
         >
           <Text
             style={{

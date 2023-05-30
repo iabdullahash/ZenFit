@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from extras import calculate_calorie_intake
+from extras import calculate_calorie_intake,calculate_steps_to_burn_calories,calculate_calories_goal
 import json
 
 app = Flask(__name__)
@@ -68,7 +68,7 @@ def signup():
     # Create a new user and add it to the database
     calorie_intake = calculate_calorie_intake(gender, int(age), int(height), weight)
     goals = {"requiredCalories": calorie_intake, "dailyStepsGoal": 10000, "dailyCalorieBurnGoal": 880}
-    new_user = {'name':name,'email': email, 'password': password,"weight": weight,"height": height,'age': age,'goals': goals,"googleAuthKey":'',"meals": {"breakfast":[],"lunch":[],"dinner":[],"snack":[]}}
+    new_user = {'name':name,'email': email, 'password': password,'gender':gender ,"weight": weight,"height": int(height),'age': int(age),'goals': goals,"googleAuthKey":'',"meals": {"breakfast":[],"lunch":[],"dinner":[],"snack":[]}}
     users.append(new_user)
     data['users'] = users
     save_data(data)
@@ -97,25 +97,62 @@ def get_workout_plans():
 
     return jsonify(workout_plans)
 
+#--------------------------------------Personael Info Change--------------------------------
+
+@app.route("/api/info_chg",methods=['GET','POST'])
+def info_chg():
+    user_email = request.json.get('user_email')
+    user_name = request.json.get('name_chg')
+    user_new_email = request.json.get('email_chg')
+    user_age = request.json.get('age_chg')
+    user_height = request.json.get('height_chg')
+    user_weight = request.json.get('weight_chg')
+
+    data = load_data()
+    users = data.get('users', [])
+
+    for user in users :
+        if user['email'] == user_email:
+            upd_user = user
+            user['name'] = user_name
+            user['email'] = user_new_email
+            user['age'] = int(user_age)
+            user['height'] = int(user_height)
+            user['weight']['amount'] = user_weight
+
+            data['users'] = users
+            save_data(data)
+            
+    return jsonify({'message': 'Goals Changed Successfully','result': upd_user}) 
+    
+
+
+
+
 
 #--------------------------------------Password Change--------------------------------
 
 @app.route("/api/pass_chg",methods=['GET','POST'])
 def pass_chg():
+    user_email = request.json.get('user_email')
     old = request.json.get('old_password')
     new = request.json.get('new_password')
     confirm = request.json.get('confirm_password')
 
     data = load_data()
     users = data.get('users', [])
-
+  
     for user in users :
-        if user['email'] == "yourdaddy257@gmail.com":
+        if user['email'] == user_email:
+           
             if user['password'] == old:
+             
                 if new == confirm:
+                   
 
                     user['password'] = new
-                    save_data(user)
+                    data['users'] = users
+                    save_data(data)
                                 
                     return jsonify({'message': 'Password changed successfully'})
 
@@ -126,8 +163,49 @@ def pass_chg():
                 
 
     
+#--------------------------------------Goal Change--------------------------------
+
+@app.route("/api/calories_goal_chg",methods=['GET','POST'])
+def calories_goal_chg():
+    user_email = request.json.get('user_email')
+    cal_chg = request.json.get('calories_chg')
+    step_chg = request.json.get('steps_chg')
+    
+    data = load_data()
+    users = data.get('users', [])
+
+    for user in users :
+
+        if user['email'] == user_email:
+            upd_user = user
+            if user["goals"]["dailyStepsGoal"] != int(step_chg):
+                upd_cal = calculate_calories_goal(user['weight'],user['height'],user['gender'],step_chg)
+
+                user["goals"]["dailyStepsGoal"] = int(step_chg)
+                user["goals"]["dailyCalorieBurnGoal"] = int(upd_cal)
+
+                data['users'] = users 
+                save_data(data) 
+                
+                
+
+            elif user["goals"]["dailyCalorieBurnGoal"] != int(cal_chg):   
+                upd_steps = calculate_steps_to_burn_calories(user['weight'],user['height'],user['gender'],cal_chg)
+
+                user["goals"]["dailyStepsGoal"] = int(upd_steps)
+                user["goals"]["dailyCalorieBurnGoal"] = int(cal_chg)
+
+                data['users'] = users 
+                save_data(data) 
+                
+    return jsonify({'message': 'Goals Changed Successfully','result': upd_user}) 
+                   
+            
+
 
             
+
+
                 
 
 

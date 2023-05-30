@@ -3,7 +3,7 @@
         {
             "name": "Maaz Siddiqui",
             "email": "yourdaddy257@gmail.com",
-            "password": "googleisgay123",
+            "password": "fuckmaaz123",
             "gender": "Male",
             "weight": 44,
             "height": 160,
@@ -71,6 +71,7 @@
             "name": "Abdullah",
             "email": "abcd@gmail.com",
             "password": "12345678",
+            "gender": "Male",
             "weight": {
                 "amount": "59",
                 "unit": "kg"
@@ -83,14 +84,36 @@
                 "dailyCalorieBurnGoal": 880
             },
             "googleAuthKey": "",
-              "meals": 
-                  {"breakfast":[],
-                  "lunch":[],
-                  "dinner":[],
-                  "snack":[]
-              }
-
-            
+            "meals": {
+                "breakfast": [],
+                "lunch": [],
+                "dinner": [],
+                "snack": []
+            }
+        },
+        {
+            "name": "Muhammad Zaryab",
+            "email": "zaryab02@gmail.com",
+            "password": "dark890",
+            "gender": "Male",
+            "weight": {
+                "amount": "88",
+                "unit": "kg"
+            },
+            "height": 170,
+            "age": 21,
+            "goals": {
+                "requiredCalories": 2046,
+                "dailyStepsGoal": 994480,
+                "dailyCalorieBurnGoal": 1660
+            },
+            "googleAuthKey": "",
+            "meals": {
+                "breakfast": [],
+                "lunch": [],
+                "dinner": [],
+                "snack": []
+            }
         }
     ],
     "workoutPlans": [
