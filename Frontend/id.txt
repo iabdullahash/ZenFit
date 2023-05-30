@@ -1,3 +1,1 @@
-client secret = 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
-client id = 231296173641-91rameej6e0h5kg6cmorkmi44ndjc24v.apps.googleusercontent.com
-key= AIzaSyB2yxy-FU4DtxtUNIMZoWMNl_ZRWqCoaxw
+android : 935642738467-4d2emfhbkrq2scg4hjtp2q2qacpba7dt.apps.googleusercontent.com
