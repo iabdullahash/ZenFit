@@ -3,7 +3,7 @@
         {
             "name": "Maaz Siddiqui",
             "email": "yourdaddy257@gmail.com",
-            "password": "fuckmaaz123",
+            "password": "maaz123",
             "gender": "Male",
             "weight": 44,
             "height": 160,
@@ -112,6 +112,81 @@
                 "breakfast": [],
                 "lunch": [],
                 "dinner": [],
+                "snack": []
+            }
+        },
+        {
+            "name": "Ammar",
+            "email": "ammarsaqib@gmail.com",
+            "password": "12345678",
+            "gender": "Male",
+            "weight": {
+                "amount": "82",
+                "unit": "kg"
+            },
+            "height": 172,
+            "age": 20,
+            "goals": {
+                "requiredCalories": 2303,
+                "dailyStepsGoal": 10000,
+                "dailyCalorieBurnGoal": 880
+            },
+            "googleAuthKey": "",
+            "meals": {
+                "breakfast": [],
+                "lunch": [],
+                "dinner": [],
+                "snack": []
+            }
+        },
+        {
+            "name": "Asia",
+            "email": "Asia@gmail.com",
+            "password": "1234",
+            "gender": "Female",
+            "weight": {
+                "amount": "54",
+                "unit": "kg"
+            },
+            "height": 143,
+            "age": 34,
+            "goals": {
+                "requiredCalories": 2260,
+                "dailyStepsGoal": 10000,
+                "dailyCalorieBurnGoal": 880
+            },
+            "googleAuthKey": "",
+            "meals": {
+                "breakfast": [
+                    {
+                        "name": "Example Meal",
+                        "quantity": 1,
+                        "calories": 350,
+                        "proteins": 20,
+                        "carbs": 30,
+                        "fats": 10
+                    }
+                ],
+                "lunch": [
+                    {
+                        "name": "Example Meal",
+                        "quantity": 1,
+                        "calories": 350,
+                        "proteins": 20,
+                        "carbs": 30,
+                        "fats": 10
+                    }
+                ],
+                "dinner": [
+                    {
+                        "name": "Example Meal",
+                        "quantity": 1,
+                        "calories": 350,
+                        "proteins": 20,
+                        "carbs": 30,
+                        "fats": 10
+                    }
+                ],
                 "snack": []
             }
         }
@@ -338,6 +413,189 @@
                     ]
                 }
             ]
+        },
+        {
+            "id": 3,
+            "title": "Cardiovascular Workout Plan",
+            "description": "An effective cardio workout plan to improve cardiovascular fitness.",
+            "image": "https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHdvcmtvdXRzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+            "details": "This workout plan is designed to improve cardiovascular fitness and burn calories. It includes various cardio exercises that can be done indoors or outdoors. Aim to perform these exercises at a moderate to high intensity for the best results.",
+            "workouts": [
+                {
+                    "day": "Monday",
+                    "exercises": [
+                        {
+                            "name": "Running",
+                            "duration": "30 minutes"
+                        },
+                        {
+                            "name": "Jumping Jacks",
+                            "duration": "3 sets of 30 seconds"
+                        },
+                        {
+                            "name": "Cycling",
+                            "duration": "20 minutes"
+                        },
+                        {
+                            "name": "Burpees",
+                            "duration": "3 sets of 10 reps"
+                        },
+                        {
+                            "name": "Jump Rope",
+                            "duration": "3 sets of 1 minute"
+                        }
+                    ]
+                },
+                {
+                    "day": "Wednesday",
+                    "exercises": [
+                        {
+                            "name": "High-Intensity Interval Training (HIIT)",
+                            "duration": "20 minutes"
+                        },
+                        {
+                            "name": "Mountain Climbers",
+                            "duration": "3 sets of 12 reps"
+                        },
+                        {
+                            "name": "Stair Climbing",
+                            "duration": "15 minutes"
+                        },
+                        {
+                            "name": "Box Jumps",
+                            "duration": "3 sets of 8 reps"
+                        },
+                        {
+                            "name": "Rowing Machine",
+                            "duration": "15 minutes"
+                        }
+                    ]
+                },
+                {
+                    "day": "Friday",
+                    "exercises": [
+                        {
+                            "name": "Swimming",
+                            "duration": "30 minutes"
+                        },
+                        {
+                            "name": "Sprint Intervals",
+                            "duration": "5 sets of 30 seconds"
+                        },
+                        {
+                            "name": "Jumping Lunges",
+                            "duration": "3 sets of 10 reps"
+                        },
+                        {
+                            "name": "Elliptical Machine",
+                            "duration": "20 minutes"
+                        },
+                        {
+                            "name": "Circuit Training",
+                            "duration": "3 sets of 1 minute"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "title": "Flexibility and Mobility Routine",
+            "description": "A stretching and mobility routine to improve flexibility and mobility.",
+            "image": "https://images.unsplash.com/photo-1635367216109-aa3353c0c22e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzF8fHdvcmtvdXRzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+            "details": "This routine focuses on improving flexibility and mobility through a variety of stretching exercises. It is suitable for all fitness levels and can be done as a standalone routine or as a warm-up or cool-down for other workouts.",
+            "workouts": [
+                {
+                    "day": "Monday",
+                    "exercises": [
+                        {
+                            "name": "Neck Rolls",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Shoulder Stretch",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Chest Opener",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Standing Forward Bend",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Standing Quad Stretch",
+                            "sets": 2,
+                            "reps": 10
+                        }
+                    ]
+                },
+                {
+                    "day": "Wednesday",
+                    "exercises": [
+                        {
+                            "name": "Seated Forward Fold",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Butterfly Stretch",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Hamstring Stretch",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Hip Flexor Stretch",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Calf Stretch",
+                            "sets": 2,
+                            "reps": 10
+                        }
+                    ]
+                },
+                {
+                    "day": "Friday",
+                    "exercises": [
+                        {
+                            "name": "Spinal Twist",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Groin Stretch",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Tricep Stretch",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Hip Opener",
+                            "sets": 2,
+                            "reps": 10
+                        },
+                        {
+                            "name": "Ankle Mobility",
+                            "sets": 2,
+                            "reps": 10
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "mealPlans": [
@@ -396,6 +654,124 @@
                     "snacks": [
                         "Mixed fruit salad",
                         "Rice cakes with almond butter"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Vegetarian Meal Plan",
+            "description": "A delicious and nutritious meal plan for vegetarians.",
+            "image": "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+            "details": "This vegetarian meal plan is designed to provide a well-rounded diet without meat. It includes a variety of plant-based proteins, whole grains, fruits, and vegetables to ensure you meet your nutritional needs.",
+            "meals": [
+                {
+                    "day": "Monday",
+                    "breakfast": "Vegetable scramble with tofu, bell peppers, and spinach",
+                    "lunch": "Chickpea salad with mixed greens, tomatoes, and balsamic dressing",
+                    "dinner": "Lentil curry with brown rice and naan bread",
+                    "snacks": [
+                        "Mixed fruit salad",
+                        "Hummus with carrot sticks"
+                    ]
+                },
+                {
+                    "day": "Tuesday",
+                    "breakfast": "Avocado toast with whole grain bread and cherry tomatoes",
+                    "lunch": "Quinoa and black bean burrito bowl with salsa and guacamole",
+                    "dinner": "Eggplant Parmesan with whole wheat pasta",
+                    "snacks": [
+                        "Greek yogurt with honey and walnuts",
+                        "Trail mix with dried fruits and nuts"
+                    ]
+                },
+                {
+                    "day": "Wednesday",
+                    "breakfast": "Spinach and mushroom omelette with whole grain toast",
+                    "lunch": "Roasted vegetable wrap with hummus",
+                    "dinner": "Sweet potato and black bean chili",
+                    "snacks": [
+                        "Apple slices with almond butter",
+                        "Cucumber and tomato salad"
+                    ]
+                },
+                {
+                    "day": "Thursday",
+                    "breakfast": "Blueberry and almond smoothie with chia seeds",
+                    "lunch": "Caprese salad with fresh mozzarella, tomatoes, and basil",
+                    "dinner": "Vegetable stir-fry with tofu and brown rice",
+                    "snacks": [
+                        "Cottage cheese with sliced peaches",
+                        "Rice cakes with peanut butter"
+                    ]
+                },
+                {
+                    "day": "Friday",
+                    "breakfast": "Oatmeal with mixed berries and a sprinkle of flaxseeds",
+                    "lunch": "Mediterranean quinoa salad with feta cheese and olives",
+                    "dinner": "Egg fried rice with mixed vegetables",
+                    "snacks": [
+                        "Carrot and celery sticks with hummus",
+                        "Mixed nuts"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Gluten-Free Meal Plan",
+            "description": "A gluten-free meal plan for individuals with gluten intolerance or sensitivity.",
+            "image": "https://images.unsplash.com/photo-1497888329096-51c27beff665?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1lYWwlMjBwbGFuc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            "details": "This gluten-free meal plan excludes all sources of gluten, such as wheat, barley, and rye. It focuses on naturally gluten-free ingredients and offers a variety of options for breakfast, lunch, dinner, and snacks.",
+            "meals": [
+                {
+                    "day": "Monday",
+                    "breakfast": "Quinoa porridge with mixed berries and honey",
+                    "lunch": "Grilled chicken salad with mixed greens and lemon vinaigrette",
+                    "dinner": "Grilled salmon with roasted vegetables and quinoa",
+                    "snacks": [
+                        "Rice cakes with almond butter",
+                        "Fresh fruit"
+                    ]
+                },
+                {
+                    "day": "Tuesday",
+                    "breakfast": "Egg and vegetable scramble with gluten-free toast",
+                    "lunch": "Taco bowl with ground turkey, black beans, and avocado",
+                    "dinner": "Stir-fried shrimp with gluten-free noodles and vegetables",
+                    "snacks": [
+                        "Celery sticks with peanut butter",
+                        "Gluten-free granola bar"
+                    ]
+                },
+                {
+                    "day": "Wednesday",
+                    "breakfast": "Gluten-free pancakes with maple syrup and sliced bananas",
+                    "lunch": "Quinoa and vegetable stir-fry",
+                    "dinner": "Grilled chicken breast with sweet potato fries and steamed broccoli",
+                    "snacks": [
+                        "Greek yogurt with gluten-free granola",
+                        "Popcorn"
+                    ]
+                },
+                {
+                    "day": "Thursday",
+                    "breakfast": "Smoothie bowl with almond milk, spinach, and gluten-free granola",
+                    "lunch": "Salmon and avocado sushi rolls with gluten-free soy sauce",
+                    "dinner": "Baked chicken with quinoa and roasted Brussels sprouts",
+                    "snacks": [
+                        "Rice crackers with hummus",
+                        "Mixed nuts"
+                    ]
+                },
+                {
+                    "day": "Friday",
+                    "breakfast": "Gluten-free oatmeal with sliced peaches and cinnamon",
+                    "lunch": "Chicken and vegetable kebabs with quinoa",
+                    "dinner": "Grilled steak with mashed sweet potatoes and saut\u00c3\u00a9ed asparagus",
+                    "snacks": [
+                        "Carrot sticks with ranch dip",
+                        "Gluten-free pretzels"
                     ]
                 }
             ]
