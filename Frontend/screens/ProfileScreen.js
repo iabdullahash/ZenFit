@@ -40,7 +40,7 @@ import {
     const navigation = useNavigation();
     const { userData , clearUserContext } = useContext(UserContext);
     const handleLogout = () => {
-      // clearUserContext();
+      clearUserContext();
       // navigation.navigate('Welcome');
     };
 

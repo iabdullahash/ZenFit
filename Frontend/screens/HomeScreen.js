@@ -46,7 +46,7 @@ const HomeScreen = () => {
           <Image source={require('../assets/images/cow.jpg')} style={styles.profileImage} />
           <View style={styles.profileTextContainer}>
             <Text style={styles.profileText}>Hello</Text>
-            <Text style={styles.profileName}>{userData.name}</Text>
+            <Text style={styles.profileName}>{userData?.name || 'Guest'}</Text>
           </View>
         </View>
         <View>
@@ -63,7 +63,7 @@ const HomeScreen = () => {
 
           <View style={{flexDirection:'column',justifyContent:'center'}}>
             <Text style={styles.targetTitle}>Total calories</Text>
-            <Text style={styles.targetValue}>{userData.goals.dailyCalorieBurnGoal} <Text style={styles.calText}>cal</Text></Text>
+            <Text style={styles.targetValue}>{userData?.goals?.dailyCalorieBurnGoal || '0'}{' '} <Text style={styles.calText}>cal</Text></Text>
           </View>
 
           <Image source={require('../assets/images/fire.png')} style={styles.targetIcon} />
@@ -79,7 +79,7 @@ const HomeScreen = () => {
 
           <View style={{flexDirection:'column',justifyContent:'center'}}>
             <Text style={styles.targetTitle}>Total steps</Text>
-            <Text style={styles.targetValue}>{userData.goals.dailyStepsGoal}</Text>
+            <Text style={styles.targetValue}>{userData?.goals?.dailyStepsGoal || '0'}</Text>
           </View>
 
           <Image source={require('../assets/images/running.png')} style={styles.targetIcon} />

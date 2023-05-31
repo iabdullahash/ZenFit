@@ -25,7 +25,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { updateUser } = useContext(UserContext);
+  const { updateUser,setLoggedIn } = useContext(UserContext);
 
   const handleLogin = async () => {
     try {
@@ -35,6 +35,7 @@ const LoginScreen = () => {
         // Successful login
         const data = response.data;
         updateUser(data.result);
+        setLoggedIn(true);
         navigation.navigate('Main');
       } else {
         // Other error occurred
@@ -48,7 +49,7 @@ const LoginScreen = () => {
         Alert.alert('Error', errorMessage);
       } else if (error.request) {
         // The request was made but no response was received
-        Alert.alert('Error', 'No response from the server. Please try again.');
+        console.error('Error', 'No response from the server. Please try again.');
       } else {
         // Other error occurred
         Alert.alert('Error', 'Login failed. Please try again.');

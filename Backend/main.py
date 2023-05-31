@@ -48,7 +48,6 @@ def login():
 @app.route('/api/signup', methods=['POST'])
 def signup():
     details = request.json.get('data')
-    print(details)
     name = details['name']
     email = details['email']
     password = details['password']
@@ -128,6 +127,62 @@ def info_chg():
 
 
 
+
+
+@app.route('/api/meals', methods=['GET','POST'])
+def get_meals():
+    email = request.json.get('email')
+
+    data = load_data()
+    users = data.get('users', [])
+
+    for user in users:
+        if user['email'] == email:
+            return jsonify(user['meals'])
+
+
+@app.route('/api/add_meal', methods=['POST'])
+def add_meal():
+    email = request.json.get('email')
+    mealType = request.json.get('mealType').lower()
+    mealItem = request.json.get('mealItem')
+    print(mealItem)
+
+    data = load_data()
+    users = data.get('users', [])
+
+    for user in users:
+        if user['email'] == email:
+            user['meals'][mealType].append(mealItem)
+            break
+
+    data['users'] = users
+    save_data(data)
+    return jsonify({"message": "Meal added successfully"})
+
+
+
+@app.route('/api/delete_meal', methods=['POST'])
+def delete_meal():
+    email = request.json.get('email')
+    mealType = request.json.get('mealType').lower()
+    mealItem = request.json.get('mealItem')
+    index = request.json.get('index')
+
+    data = load_data()
+    users = data.get('users', [])
+
+    try:
+        for user in users:
+            if user['email'] == email:
+                del user['meals'][mealType][int(index)]
+                break
+    except IndexError:
+        return jsonify({"message": "Invalid index"})
+
+    data['users'] = users
+    save_data(data)
+    return jsonify({"message": "Meal deleted successfully"})
 
 
 #--------------------------------------Password Change--------------------------------

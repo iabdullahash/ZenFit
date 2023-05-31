@@ -1,10 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext , useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Modal, Pressable } from 'react-native';
 import { UserContext } from '../config/global/UserContext';
 import Colors from '../constants/Colors';
 import Spacing from '../constants/Spacing';
 import Fonts from '../constants/Fonts';
 import FontSize from '../constants/FontSize';
+import api from "../config/api/index"
+
 
 
 const DiaryScreen = () => {
@@ -19,35 +21,107 @@ const DiaryScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [infoModalVisible, setInfoModalVisible] = useState(false);
 
+  useEffect(() => {
+    fetchMealData();
+  }, []);
 
-  const handleAddItem = (mealType) => {
-    // Generate a random meal item
-    const mealItem = {
-      name: "Example Meal",
-      quantity: 1,
-      calories: 350,
-      proteins: 20,
-      carbs: 30,
-      fats: 10,
-    };
+  const fetchMealData = async () => {
+    try {
+      let email = userData.email;
+      const response = await api.post('/meals',{email});
+      // console.log(response.data)
+      const mealsData = await response.data;
 
-    // Add the meal item to the respective meal array based on the meal type
-    switch (mealType) {
-      case "Breakfast":
-        setBreakfastItems([...breakfastItems, mealItem]);
-        break;
-      case "Lunch":
-        setLunchItems([...lunchItems, mealItem]);
-        break;
-      case "Dinner":
-        setDinnerItems([...dinnerItems, mealItem]);
-        break;
-      case "Snacks":
-        setSnackItems([...snackItems, mealItem]);
-        break;
-      default:
-        break;
+      setBreakfastItems(mealsData.breakfast);
+      setLunchItems(mealsData.lunch);
+      setDinnerItems(mealsData.dinner);
+      setSnackItems(mealsData.snack);
+    } catch (error) {
+      console.error('Error fetching meals:', error);
     }
+    // const mealsData = {
+    //   breakfastItems: [
+    //     {
+    //       name: "Breakfast Item 1",
+    //       quantity: 1,
+    //       calories: 350,
+    //       proteins: 20,
+    //       carbs: 30,
+    //       fats: 10,
+    //     },
+    //     {
+    //       name: "Breakfast Item 2",
+    //       quantity: 1,
+    //       calories: 250,
+    //       proteins: 15,
+    //       carbs: 20,
+    //       fats: 8,
+    //     },
+    //   ],
+    //   lunchItems: [
+    //     {
+    //       name: "Lunch Item 1",
+    //       quantity: 1,
+    //       calories: 500,
+    //       proteins: 25,
+    //       carbs: 40,
+    //       fats: 15,
+    //     },
+    //   ],
+    //   dinnerItems: [],
+    //   snackItems: [
+    //     {
+    //       name: "Snack Item 1",
+    //       quantity: 1,
+    //       calories: 150,
+    //       proteins: 10,
+    //       carbs: 15,
+    //       fats: 5,
+    //     },
+    //   ],
+    // };
+
+    
+  };
+
+  const handleAddItem = async (mealType) => {
+    // Generate a random meal item
+    try{
+      const mealItem = {
+        name: "Example Meal",
+        quantity: 1,
+        calories: 350,
+        proteins: 20,
+        carbs: 30,
+        fats: 10,
+      };
+
+      let email = userData.email
+
+      switch (mealType) {
+        case "Breakfast":
+          setBreakfastItems([...breakfastItems, mealItem]);
+          break;
+        case "Lunch":
+          setLunchItems([...lunchItems, mealItem]);
+          break;
+        case "Dinner":
+          setDinnerItems([...dinnerItems, mealItem]);
+          break;
+        case "Snacks":
+          setSnackItems([...snackItems, mealItem]);
+          break;
+        default:
+          break;
+      }
+      const response = await api.post('/add_meal',{mealType,mealItem,email})
+      
+      message = await response.data.message
+      console.log(message)
+      // Add the meal item to the respective meal array based on the meal type
+    } catch(error){
+      console.error('Error adding meal item:', error);
+    }  
   };
 
   const handleCancelAddItem = () => {
@@ -62,9 +136,16 @@ const DiaryScreen = () => {
     setModalVisible(true);
   };
 
-    const handleDeleteMealItem = () => {
+    const handleDeleteMealItem = async () => {
       if (selectedMealItem) {
-        const { mealType, index } = selectedMealItem;
+
+       try {
+          const { mealType, index } = selectedMealItem;
+        let email = userData.email
+        const response = await api.post('/delete_meal',{mealType,index,email})
+
+        const message = response.data.message
+        console.log(message)
   
         switch (mealType) {
           case "Breakfast":
@@ -92,6 +173,9 @@ const DiaryScreen = () => {
         }
   
         setSelectedMealItem(null);
+      } catch(error){
+        console.error('Error deleting meal item:', error);
+      }
       }
       setModalVisible(false); // Close the modal
     };

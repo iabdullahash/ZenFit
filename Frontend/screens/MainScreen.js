@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import{View,Text,StyleSheet,Image} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
 import DiaryScreen from './DiaryScreen';
 import PlansScreen from './PlansScreen';
@@ -14,6 +15,7 @@ import FontSize from '../constants/FontSize';
 const Tab = createBottomTabNavigator();
 
 const MainScreen = () => {
+  const navigation = useNavigation()
   return (
     <Tab.Navigator screenOptions={{headerShown:false,
       tabBarShowLabel: false,
