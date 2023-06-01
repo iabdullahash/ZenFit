@@ -8,6 +8,7 @@ import Fonts from '../constants/Fonts';
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 import { BarChart, LineChart } from 'react-native-chart-kit';
+import Animated, {FadeInUp,FadeInDown, FadeInRight } from 'react-native-reanimated';
 
 
 const HomeScreen = () => {
@@ -40,7 +41,7 @@ const HomeScreen = () => {
       flex:1,
     }}>
     <View style={styles.container}>
-
+    <Animated.View entering={FadeInDown.delay(400).duration(500)} exiting={FadeInUp.delay(400).duration(500)}>
       <View style={styles.profileContainer}>
         <View style={{flexDirection:'row',alignItems:'center'}}>
           <Image source={require('../assets/images/cow.jpg')} style={styles.profileImage} />
@@ -55,10 +56,13 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+      </Animated.View>
       
       <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>Today's Target</Text>
 
+        <Animated.View entering={FadeInDown.delay(800).duration(500)}>
+        <Text style={styles.sectionTitle}>Today's Target</Text>
+        <View>
         <TouchableOpacity style={styles.targetContainer}>
 
           <View style={{flexDirection:'column',justifyContent:'center'}}>
@@ -74,7 +78,11 @@ const HomeScreen = () => {
           </View>
 
         </TouchableOpacity>
+        </View>
+        </Animated.View>
 
+
+        <Animated.View entering={FadeInDown.delay(1200).duration(500)}>
         <TouchableOpacity style={styles.targetContainer}>
 
           <View style={{flexDirection:'column',justifyContent:'center'}}>
@@ -90,9 +98,11 @@ const HomeScreen = () => {
           </View>
 
         </TouchableOpacity>
+        </Animated.View>
 
       </View>
       
+      <Animated.View entering={FadeInDown.delay(1600).duration(500)}>
       <View>
         <Text style={styles.sectionTitle }>Activities report</Text>
         {/* <View style={{alignItems:'center',justifyContent:'center',marginHorizontal:Spacing*2}}> */}
@@ -112,6 +122,7 @@ const HomeScreen = () => {
         />
         </View>
       </View>
+      </Animated.View>
     </View>
     </SafeAreaView>
   );

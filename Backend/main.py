@@ -67,7 +67,7 @@ def signup():
     # Create a new user and add it to the database
     calorie_intake = calculate_calorie_intake(gender, int(age), int(height), weight)
     goals = {"requiredCalories": calorie_intake, "dailyStepsGoal": 10000, "dailyCalorieBurnGoal": 880}
-    new_user = {'name':name,'email': email, 'password': password,'gender':gender ,"weight": weight,"height": int(height),'age': int(age),'goals': goals,"googleAuthKey":'',"meals": {"breakfast":[],"lunch":[],"dinner":[],"snack":[]}}
+    new_user = {'name':name,'email': email, 'password': password,'gender':gender ,"weight": weight,"height": int(height),'age': int(age),'goals': goals,"googleAuthKey":'',"meals": {"breakfast":[],"lunch":[],"dinner":[],"snacks":[]}}
     users.append(new_user)
     data['users'] = users
     save_data(data)
@@ -145,15 +145,20 @@ def get_meals():
 def add_meal():
     email = request.json.get('email')
     mealType = request.json.get('mealType').lower()
-    mealItem = request.json.get('mealItem')
+    mealItem = request.json.get('foodItem')
+    quantity = request.json.get('quantity')
+    print(mealType)
     print(mealItem)
+    
 
     data = load_data()
     users = data.get('users', [])
 
+    item = {'info': mealItem,'quantity':int(quantity)}
+
     for user in users:
         if user['email'] == email:
-            user['meals'][mealType].append(mealItem)
+            user['meals'][mealType].append(item)
             break
 
     data['users'] = users

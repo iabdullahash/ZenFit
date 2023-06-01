@@ -6,7 +6,9 @@ import Colors from '../constants/Colors';
 import Spacing from '../constants/Spacing';
 import Fonts from '../constants/Fonts';
 import FontSize from '../constants/FontSize';
-import api from "../config/api/index"
+import api from "../config/api/index";
+import Animated, {FadeInUp,FadeInDown, FadeInRight , FadeInLeft} from 'react-native-reanimated';
+
 
 const Stack = createStackNavigator();
 
@@ -118,11 +120,13 @@ const PlansScreen = () => {
       workoutPlans;
 
     const renderPlan = ({ item }) => (
+      <Animated.View entering={FadeInDown.delay(400).duration(500)} exiting={FadeInUp.delay(400).duration(500)}>
       <TouchableOpacity style={styles.planContainer} onPress={() => handlePlanPress(item)}>
         <Image source={{uri : item.image}} style={styles.planImage} />
         <Text style={styles.planTitle}>{item.title}</Text>
         <Text style={styles.planDescription}>{item.description}</Text>
       </TouchableOpacity>
+      </Animated.View>
     );
 
     return (

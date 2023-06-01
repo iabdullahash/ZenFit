@@ -1,16 +1,23 @@
 import React, { useState, useContext , useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Modal, Pressable } from 'react-native';
 import { UserContext } from '../config/global/UserContext';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useIsFocused, useNavigation} from '@react-navigation/native';
+import {SearchScreen,FoodDetailsScreen,FoodDetailsWeb} from './SearchFood';
 import Colors from '../constants/Colors';
 import Spacing from '../constants/Spacing';
 import Fonts from '../constants/Fonts';
 import FontSize from '../constants/FontSize';
-import api from "../config/api/index"
+import api from "../config/api/index";
+import Animated, {FadeInUp,FadeInDown, FadeInRight , FadeInLeft} from 'react-native-reanimated';
 
-
+const Stack = createStackNavigator();
 
 const DiaryScreen = () => {
   const { userData } = useContext(UserContext);
+  const navigation = useNavigation()
+
+  const isFocused = useIsFocused();
 
   const [breakfastItems, setBreakfastItems] = useState([]);
   const [lunchItems, setLunchItems] = useState([]);
@@ -19,114 +26,68 @@ const DiaryScreen = () => {
   const [selectedMealItem, setSelectedMealItem] = useState(null);
   const [selectedMealItemInfo, setSelectedMealItemInfo] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [infoModalVisible, setInfoModalVisible] = useState(false);
 
   useEffect(() => {
     fetchMealData();
-  }, []);
+  }, [isFocused]);
 
   const fetchMealData = async () => {
     try {
       let email = userData.email;
       const response = await api.post('/meals',{email});
-      // console.log(response.data)
+      console.log(response.data)
       const mealsData = await response.data;
 
       setBreakfastItems(mealsData.breakfast);
       setLunchItems(mealsData.lunch);
       setDinnerItems(mealsData.dinner);
-      setSnackItems(mealsData.snack);
+      setSnackItems(mealsData.snacks);
     } catch (error) {
       console.error('Error fetching meals:', error);
     }
-    // const mealsData = {
-    //   breakfastItems: [
-    //     {
-    //       name: "Breakfast Item 1",
-    //       quantity: 1,
-    //       calories: 350,
-    //       proteins: 20,
-    //       carbs: 30,
-    //       fats: 10,
-    //     },
-    //     {
-    //       name: "Breakfast Item 2",
-    //       quantity: 1,
-    //       calories: 250,
-    //       proteins: 15,
-    //       carbs: 20,
-    //       fats: 8,
-    //     },
-    //   ],
-    //   lunchItems: [
-    //     {
-    //       name: "Lunch Item 1",
-    //       quantity: 1,
-    //       calories: 500,
-    //       proteins: 25,
-    //       carbs: 40,
-    //       fats: 15,
-    //     },
-    //   ],
-    //   dinnerItems: [],
-    //   snackItems: [
-    //     {
-    //       name: "Snack Item 1",
-    //       quantity: 1,
-    //       calories: 150,
-    //       proteins: 10,
-    //       carbs: 15,
-    //       fats: 5,
-    //     },
-    //   ],
-    // };
 
-    
   };
 
-  const handleAddItem = async (mealType) => {
-    // Generate a random meal item
-    try{
-      const mealItem = {
-        name: "Example Meal",
-        quantity: 1,
-        calories: 350,
-        proteins: 20,
-        carbs: 30,
-        fats: 10,
-      };
+  // const handleAddItem = async (mealType) => {
+  //   // Generate a random meal item
+  //   try{
+  //     const mealItem = {
+  //       name: "Example Meal",
+  //       quantity: 1,
+  //       calories: 350,
+  //       proteins: 20,
+  //       carbs: 30,
+  //       fats: 10,
+  //     };
 
-      let email = userData.email
+  //     let email = userData.email
 
-      switch (mealType) {
-        case "Breakfast":
-          setBreakfastItems([...breakfastItems, mealItem]);
-          break;
-        case "Lunch":
-          setLunchItems([...lunchItems, mealItem]);
-          break;
-        case "Dinner":
-          setDinnerItems([...dinnerItems, mealItem]);
-          break;
-        case "Snacks":
-          setSnackItems([...snackItems, mealItem]);
-          break;
-        default:
-          break;
-      }
-      const response = await api.post('/add_meal',{mealType,mealItem,email})
+  //     switch (mealType) {
+  //       case "Breakfast":
+  //         setBreakfastItems([...breakfastItems, mealItem]);
+  //         break;
+  //       case "Lunch":
+  //         setLunchItems([...lunchItems, mealItem]);
+  //         break;
+  //       case "Dinner":
+  //         setDinnerItems([...dinnerItems, mealItem]);
+  //         break;
+  //       case "Snacks":
+  //         setSnackItems([...snackItems, mealItem]);
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //     const response = await api.post('/add_meal',{mealType,mealItem,email})
       
-      message = await response.data.message
-      console.log(message)
-      // Add the meal item to the respective meal array based on the meal type
-    } catch(error){
-      console.error('Error adding meal item:', error);
-    }  
-  };
+  //     message = await response.data.message
+  //     console.log(message)
+  //     // Add the meal item to the respective meal array based on the meal type
+  //   } catch(error){
+  //     console.error('Error adding meal item:', error);
+  //   }  
+  // };
 
-  const handleCancelAddItem = () => {
-    setModalVisible(false);
-  }
 
 
   const handleConfirmDelete = (mealType, index) => {
@@ -203,16 +164,8 @@ const DiaryScreen = () => {
   
     
     const renderMealItem = (mealType, mealItems) => {
-      const totalCalories = mealItems.reduce((sum, item) => sum + item.calories, 0);
+      const totalCalories = mealItems.reduce((sum, item) => sum + (parseInt(item.info.food_description.split('|')[0].split('-')[1].split(':')[1])*item.quantity), 0);
     
-      const handleOpenModal = (item) => {
-        setSelectedMealItemInfo(item);
-        setInfoModalVisible(true);
-      };
-
-      const handleCloseModal = () => {
-        setInfoModalVisible(false);
-      };
     
       return (
         <View style={styles.mealSection}>
@@ -222,62 +175,38 @@ const DiaryScreen = () => {
           </View>
           <View style={{ ...styles.separator, marginBottom: Spacing, height: 1 }} />
           {mealItems.map((item, index) => (
+            <Animated.View entering={FadeInLeft.delay(400).duration(500)} exiting={FadeInRight.delay(400).duration(500)} key={index}>
             <TouchableOpacity
               key={index}
               style={styles.mealItemContainer}
               onLongPress={() => handleConfirmDelete(mealType, index)}
-              onPress={() => handleOpenModal(item)}
+              onPress={() => navigation.navigate('FoodDetails', { foodItem: item.info ,mealType: mealType,operation: 'view'})}
             >
               <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                <Text style={styles.mealItemName}>{item.name}</Text>
+                <Text style={styles.mealItemName}>{item.info.food_name}</Text>
                 <Text style={styles.mealItemDescription}>{item.quantity} serving</Text>
               </View>
-              <Text style={styles.mealItemCalories}>{item.calories} Cal</Text>
+              <Text style={styles.mealItemCalories}>{parseInt(item.info.food_description.split('|')[0].split('-')[1].split(':')[1])*item.quantity} Cal</Text>
             </TouchableOpacity>
+            </Animated.View>
           ))}
           <TouchableOpacity
             style={styles.addButton}
-            onPress={() => handleAddItem(mealType)}
+            onPress={() => navigation.navigate('Search',{mealType})}
           >
             <Text style={styles.addButtonText}>+ Add Item</Text>
           </TouchableOpacity>
-    
-          <Modal
-            visible={infoModalVisible}
-            animationType="fade"
-            transparent={true}
-            onRequestClose={handleCloseModal}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                {selectedMealItemInfo && (
-                  <>
-                    <Text style={styles.modalTitle}>{selectedMealItemInfo.name}</Text>
-                    <Text style={styles.modelinfotext}>Proteins:    <Text style={styles.modelinfotextspan}>{selectedMealItemInfo.proteins} g</Text></Text>
-                    <Text style={styles.modelinfotext}>Carbs:    <Text style={styles.modelinfotextspan}>{selectedMealItemInfo.carbs} g</Text></Text>
-                    <Text style={styles.modelinfotext}>Fats:    <Text style={styles.modelinfotextspan}>{selectedMealItemInfo.fats} g</Text></Text>
-                    <Text style={styles.modelinfotext}>Total Calories:    <Text style={styles.modelinfotextspan}>{selectedMealItemInfo.calories} g</Text></Text>
-                  </>
-                )}
-                <TouchableOpacity
-                  style={styles.closeButton}
-                  onPress={handleCloseModal}
-                >
-                  <Text style={styles.closeButtonText}>Close</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
+  
         </View>
       );
     };
     
 
   const getTotalCalories = () => {
-    const breakfastCalories = breakfastItems.reduce((sum, item) => sum + item.calories, 0);
-    const lunchCalories = lunchItems.reduce((sum, item) => sum + item.calories, 0);
-    const dinnerCalories = dinnerItems.reduce((sum, item) => sum + item.calories, 0);
-    const snackCalories = snackItems.reduce((sum, item) => sum + item.calories, 0);
+    const breakfastCalories = breakfastItems.reduce((sum, item) => sum + (parseInt(item.info.food_description.split('|')[0].split('-')[1].split(':')[1])*item.quantity), 0);
+    const lunchCalories = lunchItems.reduce((sum, item) => sum + (parseInt(item.info.food_description.split('|')[0].split('-')[1].split(':')[1])*item.quantity), 0);
+    const dinnerCalories = dinnerItems.reduce((sum, item) => sum + (parseInt(item.info.food_description.split('|')[0].split('-')[1].split(':')[1])*item.quantity), 0);
+    const snackCalories = snackItems.reduce((sum, item) => sum + (parseInt(item.info.food_description.split('|')[0].split('-')[1].split(':')[1])*item.quantity), 0);
 
     return breakfastCalories + lunchCalories + dinnerCalories + snackCalories;
   };
@@ -373,6 +302,18 @@ const DiaryScreen = () => {
   );
 };
 
+const App = () => {
+  return (
+      <Stack.Navigator  initialRouteName="Diary">
+        <Stack.Screen name="Diary" component={DiaryScreen} options={{headerShown:false}} />
+        <Stack.Screen name="Search" component={SearchScreen}  options={{headerStyle:{backgroundColor:Colors.background,},headerTitleStyle:{paddingTop:5,fontFamily:Fonts['poppins-regular'],color:Colors.primary},headerTintColor: 'grey',headerStatusBarHeight:Spacing*3.5, tabBarVisible: false}}/>
+        <Stack.Screen name="FoodDetails" component={FoodDetailsScreen} options={{title:'Add Food',headerStyle:{backgroundColor:Colors.background,},headerTitleStyle:{paddingTop:5,fontFamily:Fonts['poppins-regular'],color:Colors.onPrimary},headerTintColor: 'grey',headerStatusBarHeight:Spacing*3.5,tabBarVisible: false}} />
+        <Stack.Screen name="FoodDetailsWeb" component={FoodDetailsWeb}  options={{title:'Food Details',headerStyle:{backgroundColor:Colors.background,},headerTitleStyle:{paddingTop:5,fontFamily:Fonts['poppins-regular'],color:Colors.onPrimary},headerTintColor: 'grey',headerStatusBarHeight:Spacing*3.5,tabBarVisible: false, tabBarVisible: false}} />
+      </Stack.Navigator>
+  );
+};
+
+
 const styles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1,
@@ -448,6 +389,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts["poppins-regular"],
     fontSize: FontSize.small,
     color: Colors.text,
+    maxWidth:250
   },
   mealItemDescription: {
     fontFamily: Fonts["poppins-regular"],

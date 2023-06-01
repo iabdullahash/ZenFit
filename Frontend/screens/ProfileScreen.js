@@ -60,9 +60,9 @@ import {
           flex:1,
           alignitems:'center',
           marginTop:15,
-          padding: 16,
+          paddingHorizontal: 16,
           width: '100%',
-          height: 70,
+          height: 80,
           backgroundColor: Colors.background,
           borderBottomWidth: 1,
           borderBottomColor: 'lightgray',
@@ -100,6 +100,7 @@ import {
                 paddingHorizontal: Spacing * 2,
                 paddingTop: Spacing * 8,
                 paddingBottom: Spacing * 5,
+                
               }
             }
         
@@ -111,7 +112,7 @@ import {
 
           </Text>
           <View
-            style={[styles.infoContainer,{paddingBottom:Spacing*1,paddingTop:Spacing*2}]}
+            style={[styles.infoContainer,{marginBottom: Spacing*2,paddingTop:Spacing*2}]}
           >
 
               <Image
@@ -120,9 +121,9 @@ import {
               />
               <Text
                 style={{
-                  fontSize: FontSize.medium,
+                  fontSize: FontSize.large,
                   color: Colors.text,
-                  fontFamily: Font["poppins-regular"],
+                  fontFamily: Font["poppins-semiBold"],
                 }}
               >
                 {userData.name}
@@ -464,7 +465,7 @@ import {
               Old Password
             </Text>
 
-            <AppTextInput placeholder="Password" inputMode="email-address" value={old_pass} onChangeText={set_old_pass} />
+            <AppTextInput placeholder="Password" inputMode="password" value={old_pass} onChangeText={set_old_pass} />
 
 
             </View>
@@ -476,7 +477,7 @@ import {
               New Password
             </Text>
 
-            <AppTextInput placeholder="New Password" inputMode="email-address" value={new_pass} onChangeText={set_new_pass} />
+            <AppTextInput placeholder="New Password" inputMode="password" value={new_pass} onChangeText={set_new_pass} />
 
 
             </View>
@@ -488,7 +489,7 @@ import {
               Confirm Password
             </Text>
 
-            <AppTextInput placeholder="Confirm Password" inputMode="email-address" value={confirm_pass} onChangeText={set_confirm_pass} />
+            <AppTextInput placeholder="Confirm Password" inputMode="password" value={confirm_pass} onChangeText={set_confirm_pass} />
 
 
             </View>

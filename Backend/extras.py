@@ -7,9 +7,9 @@ def calculate_calorie_intake(gender,age, height, weight):
     AGE_MULTIPLIER = 6.755
 
     if weight["unit"] == 'lbs':
-        weight_kg = weight['amount'] * 0.45359237
+        weight_kg = float(weight['amount']) * 0.45359237
     else:
-        weight_kg = weight["amount"]
+        weight_kg = float(weight["amount"])
     
     # Calculate the BMR (Basal Metabolic Rate)
     bmr = 0
@@ -34,7 +34,7 @@ def calculate_calories_goal(weight,height,gender,steps):
         weight_kg = weight["amount"]
 
     if gender == 'Male':
-        height_cm = height
+        height_cm = int(height)
         stride_length = height_cm * 0.415
         distance_km = (int(steps) * stride_length) / 100000
         calories_burned = 0.035 * float(weight_kg) * distance_km 

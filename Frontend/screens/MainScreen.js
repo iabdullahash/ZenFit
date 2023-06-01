@@ -1,5 +1,6 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import{View,Text,StyleSheet,Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
@@ -7,10 +8,26 @@ import DiaryScreen from './DiaryScreen';
 import PlansScreen from './PlansScreen';
 import ProfileScreen from './ProfileScreen';
 import Colors from '../constants/Colors';
+import Spacing from '../constants/Spacing';
 import { MaterialCommunityIcons , FontAwesome } from '@expo/vector-icons';
-import Font from "../constants/Fonts";
+import Fonts from "../constants/Fonts";
 import fonts from '../config/fonts';
 import FontSize from '../constants/FontSize';
+import { FoodDetailsScreen, FoodDetailsWeb, SearchScreen } from './SearchFood';
+
+const Stack = createStackNavigator();
+
+const DiaryStackScreen = () => {
+  return (
+      <Stack.Navigator  initialRouteName="Diary">
+        <Stack.Screen name="Diary" component={MainScreen} options={{headerShown:false}} />
+        <Stack.Screen name="Search" component={SearchScreen}  options={{headerStyle:{backgroundColor:Colors.background,},headerTitleStyle:{paddingTop:5,fontFamily:Fonts['poppins-regular'],color:Colors.primary},headerTintColor: 'grey',headerStatusBarHeight:Spacing*3.5, tabBarVisible: false}}/>
+        <Stack.Screen name="FoodDetails" component={FoodDetailsScreen} options={{headerStyle:{backgroundColor:Colors.background,},headerTitleStyle:{paddingTop:5,fontFamily:Fonts['poppins-regular'],color:Colors.onPrimary},headerTintColor: 'grey',headerStatusBarHeight:Spacing*3.5,tabBarVisible: false}} />
+        <Stack.Screen name="FoodDetailsWeb" component={FoodDetailsWeb}  options={{title:'Food Details',headerStyle:{backgroundColor:Colors.background,},headerTitleStyle:{paddingTop:5,fontFamily:Fonts['poppins-regular'],color:Colors.onPrimary},headerTintColor: 'grey',headerStatusBarHeight:Spacing*3.5,tabBarVisible: false, tabBarVisible: false}} />
+      </Stack.Navigator>
+  );
+};
+
 
 const Tab = createBottomTabNavigator();
 
@@ -87,7 +104,7 @@ const MainScreen = () => {
   );
 };
 
-export default MainScreen;
+export default DiaryStackScreen;
 
 const styles = StyleSheet.create({
   view:{
@@ -96,7 +113,7 @@ const styles = StyleSheet.create({
     // top:
   },
   text:{
-    fontFamily: Font["poppins-regular"],
+    fontFamily: Fonts["poppins-regular"],
     fontSize: 12
   },
   shadow: {

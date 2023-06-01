@@ -80,15 +80,70 @@
             "age": "18",
             "goals": {
                 "requiredCalories": 1903,
-                "dailyStepsGoal": 10000,
-                "dailyCalorieBurnGoal": 880
+                "dailyStepsGoal": 5000,
+                "dailyCalorieBurnGoal": 7
             },
             "googleAuthKey": "",
             "meals": {
-                "breakfast": [],
-                "lunch": [],
+                "breakfast": [
+                    {
+                        "info": {
+                            "food_description": "Per 101g - Calories: 289kcal | Fat: 19.45g | Carbs: 0.00g | Protein: 26.63g",
+                            "food_id": "1346",
+                            "food_name": "Meat",
+                            "food_type": "Generic",
+                            "food_url": "https://www.fatsecret.com/calories-nutrition/generic/meat"
+                        },
+                        "quantity": 1
+                    },
+                    {
+                        "info": {
+                            "brand_name": "Pepperidge Farm",
+                            "food_description": "Per 1 bagel - Calories: 100kcal | Fat: 0.50g | Carbs: 20.00g | Protein: 4.00g",
+                            "food_id": "32447",
+                            "food_name": "Whole Grain 100% Wheat Mini Bagels",
+                            "food_type": "Brand",
+                            "food_url": "https://www.fatsecret.com/calories-nutrition/pepperidge-farm/whole-grain-100%25-wheat-mini-bagels"
+                        },
+                        "quantity": 1
+                    },
+                    {
+                        "info": {
+                            "brand_name": "Pizza Pizza",
+                            "food_description": "Per 1 slice - Calories: 210kcal | Fat: 6.00g | Carbs: 29.00g | Protein: 10.00g",
+                            "food_id": "61851",
+                            "food_name": "Pepperoni Pizza",
+                            "food_type": "Brand",
+                            "food_url": "https://www.fatsecret.com/calories-nutrition/pizza-pizza/pepperoni-pizza"
+                        },
+                        "quantity": 1
+                    },
+                    {
+                        "info": {
+                            "food_description": "Per 100g - Calories: 281kcal | Fat: 12.53g | Carbs: 29.45g | Protein: 12.50g",
+                            "food_id": "4882",
+                            "food_name": "Thin Crust Cheese Pizza",
+                            "food_type": "Generic",
+                            "food_url": "https://www.fatsecret.com/calories-nutrition/generic/pizza-cheese-thin-crust"
+                        },
+                        "quantity": 1
+                    }
+                ],
+                "lunch": [
+                    {
+                        "info": {
+                            "brand_name": "Lay's",
+                            "food_description": "Per 11 chips - Calories: 160kcal | Fat: 10.00g | Carbs: 15.00g | Protein: 2.00g",
+                            "food_id": "57445",
+                            "food_name": "Wavy Original Potato Chips",
+                            "food_type": "Brand",
+                            "food_url": "https://www.fatsecret.com/calories-nutrition/lays/wavy-original-potato-chips"
+                        },
+                        "quantity": 1
+                    }
+                ],
                 "dinner": [],
-                "snack": []
+                "snacks": []
             }
         },
         {
@@ -112,7 +167,7 @@
                 "breakfast": [],
                 "lunch": [],
                 "dinner": [],
-                "snack": []
+                "snacks": []
             }
         },
         {
@@ -136,7 +191,7 @@
                 "breakfast": [],
                 "lunch": [],
                 "dinner": [],
-                "snack": []
+                "snacks": []
             }
         },
         {
@@ -187,7 +242,67 @@
                         "fats": 10
                     }
                 ],
-                "snack": []
+                "snacks": []
+            }
+        },
+        {
+            "name": "Fapo",
+            "email": "Fapo@gmail.com",
+            "password": "Fapochan123",
+            "gender": "Female",
+            "weight": {
+                "amount": "40",
+                "unit": "kg"
+            },
+            "height": 160,
+            "age": 15,
+            "goals": {
+                "requiredCalories": 2285,
+                "dailyStepsGoal": 10000,
+                "dailyCalorieBurnGoal": 880
+            },
+            "googleAuthKey": "",
+            "meals": {
+                "breakfast": [],
+                "lunch": [
+                    {
+                        "info": {
+                            "brand_name": "M&M Meat Shops",
+                            "food_description": "Per 4 pieces - Calories: 170kcal | Fat: 5.00g | Carbs: 26.00g | Protein: 4.00g",
+                            "food_id": "30612",
+                            "food_name": "Vegetable Spring Rolls",
+                            "food_type": "Brand",
+                            "food_url": "https://www.fatsecret.com/calories-nutrition/mandm-meat-shops/vegetable-spring-rolls"
+                        },
+                        "quantity": 1
+                    }
+                ],
+                "dinner": [
+                    {
+                        "info": {
+                            "brand_name": "Freshly",
+                            "food_description": "Per 1 tray - Calories: 440kcal | Fat: 17.00g | Carbs: 44.00g | Protein: 31.00g",
+                            "food_id": "42202336",
+                            "food_name": "Truffled Mushroom Steak",
+                            "food_type": "Brand",
+                            "food_url": "https://www.fatsecret.com/calories-nutrition/freshly/truffled-mushroom-steak"
+                        },
+                        "quantity": 1
+                    }
+                ],
+                "snacks": [
+                    {
+                        "info": {
+                            "brand_name": "Lay's",
+                            "food_description": "Per 15 chips - Calories: 160kcal | Fat: 10.00g | Carbs: 15.00g | Protein: 2.00g",
+                            "food_id": "46031975",
+                            "food_name": "Classic Potato Chips",
+                            "food_type": "Brand",
+                            "food_url": "https://www.fatsecret.com/calories-nutrition/lays/classic-potato-chips"
+                        },
+                        "quantity": 1
+                    }
+                ]
             }
         }
     ],
