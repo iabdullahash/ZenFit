@@ -1,4 +1,10 @@
 {
+
+    "avatars":[
+        {
+            
+        }
+    ],
     "users": [
         {
             "name": "Maaz Siddiqui",
@@ -250,6 +256,7 @@
             "email": "Fapo@gmail.com",
             "password": "Fapochan123",
             "gender": "Female",
+            "avatar": "person_0.png",
             "weight": {
                 "amount": "40",
                 "unit": "kg"
@@ -258,8 +265,8 @@
             "age": 15,
             "goals": {
                 "requiredCalories": 2285,
-                "dailyStepsGoal": 10000,
-                "dailyCalorieBurnGoal": 880
+                "dailyStepsGoal": 4971,
+                "dailyCalorieBurnGoal": 435
             },
             "googleAuthKey": "",
             "meals": {

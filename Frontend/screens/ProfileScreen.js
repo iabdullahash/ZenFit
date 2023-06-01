@@ -8,10 +8,12 @@ import {
     FlatList,
     ScrollView,
     Image,
-    Alert
+    Alert,
+    
   } from "react-native";
   import React from "react";
   import {useState} from "react";
+  import { MaterialIcons } from '@expo/vector-icons'; 
   import { useNavigation } from '@react-navigation/native';
   import { createStackNavigator } from '@react-navigation/stack';
   import Spacing from "../constants/Spacing";
@@ -23,11 +25,14 @@ import {
   import api from "../config/api/index";
   import {useContext} from 'react';
   import { UserContext } from '../config/global/UserContext';
+  // import { Platform } from 'react-native';
+  // import { getAbsolutePath } from 'react-native-fs';
  
   
   
   const Stack = createStackNavigator();
-
+ 
+ 
   const ArrowButton = ({onPress}) => (
     
     <TouchableOpacity onPress={onPress}>
@@ -39,6 +44,12 @@ import {
   
     const navigation = useNavigation();
     const { userData , clearUserContext } = useContext(UserContext);
+    // const imagePath = '../assets/avatar/person_0.png';
+    // const absolutePath = `${Platform.OS === 'android' ? 'file://' : ''}${getAbsolutePath(imagePath)}`;
+    
+    const Profile_avatar = userData.avatar
+    console.log(Profile_avatar);
+   
     const handleLogout = () => {
       clearUserContext();
       // navigation.navigate('Welcome');
@@ -112,16 +123,38 @@ import {
 
           </Text>
           <View
-            style={[styles.infoContainer,{marginBottom: Spacing*2,paddingTop:Spacing*2}]}
+            style={[styles.infoContainer,{paddingTop:Spacing*1}]}
           >
 
-              <Image
-                source = {require('../assets/images/cow.jpg')}
-                style={styles.Image}
-              />
+            {/* <Image source={{ uri: absolutePath }}  style={styles.Image}/>  */}
+              
+              
+          </View>
+          <View
+            style={[styles.infoContainer,{paddingTop:Spacing*1}]}
+          >
+
+              <TouchableOpacity >
+                <Text 
+                  style ={{
+                      color : '#079ef0'
+                  }}
+                >
+                  Change Avatar
+                </Text>
+              </TouchableOpacity>
+              
+              
+          </View>
+          
+          <View
+            style={[styles.infoContainer,{marginBottom: Spacing*2,marginTop:Spacing*1}]}
+          >
+
+              
               <Text
                 style={{
-                  fontSize: FontSize.large,
+                  fontSize: FontSize.xLarge,
                   color: Colors.text,
                   fontFamily: Font["poppins-semiBold"],
                 }}
@@ -132,6 +165,7 @@ import {
 
               </Text>
           </View>
+
 
           <FlatList
             data = {Flat_data}
@@ -163,201 +197,187 @@ import {
 
 
 
-    const Personal_info = () =>{
+  const Personal_info = () =>{
 
-      const navigation = useNavigation();
-      const { userData , updateUser } = useContext(UserContext);
-      const [name_chg , setname_chg] = useState(userData.name)
-      const [email_chg , setemail_chg] = useState(userData.email)
-      const [age_chg , setage_chg] = useState(userData.age.toString())
-      const [height_chg , setheight_chg] = useState(userData.height.toString())
-      const [weight_chg , setweight_chg] = useState(userData.weight.amount)
+    const navigation = useNavigation();
+    const { userData , updateUser } = useContext(UserContext);
+    const [name_chg , setname_chg] = useState(userData.name)
+    const [email_chg , setemail_chg] = useState(userData.email)
+    const [age_chg , setage_chg] = useState(userData.age.toString())
+    const [height_chg , setheight_chg] = useState(userData.height.toString())
+    const [weight_chg , setweight_chg] = useState(userData.weight.amount)
 
-      const info_chng = async () => {
-        try {
-          const response = await api.post('/info_chg', {
-            user_email: userData.email,
-            name_chg,
-            email_chg,
-            age_chg,
-            height_chg,
-            weight_chg,
+    const info_chng = async () => {
+      try {
+        const response = await api.post('/info_chg', {
+          user_email: userData.email,
+          name_chg,
+          email_chg,
+          age_chg,
+          height_chg,
+          weight_chg,
 
-          });
-      
-          if (response.status === 200) {
-            // Password updated successfully
-            console.log(response.data);
-            const data = response.data;
-            updateUser(data.result);
-            navigation.navigate('Profile_');
-          } else {
-            // Other error occurred
-            const data = response.data;
-            console.log('Password change failed');
-          
-          }
-        } catch (error) {
-          if (error.response) {
-            // Request was made and server responded with an error status code
-            const errorMessage = error.response.data.Error;
-            console.log(errorMessage)
-            Alert.alert(errorMessage)
-         
-          } else if (error.request) {
-            // The request was made but no response was received
-            const errorMessage = error.response.data.error;
-            console.log("response request baby")
-          } else {
-            // Other error occurred
-            const errorMessage = error.response.data.error;
-            console.log("don't know wtf is happening baby")
-          }
+        });
+    
+        if (response.status === 200) {
+          // Password updated successfully
+          console.log(response.data);
+          const data = response.data;
+          updateUser(data.result);
+          navigation.navigate('Profile_');
+        } else {
+          // Other error occurred
+          const data = response.data;
+          console.log('Password change failed');
+        
         }
-      };
-      
-      return (
-        <SafeAreaView
-        style={{
-          backgroundColor: Colors.background,
-          flex:1, 
-          }}
-          >
+      } catch (error) {
+        if (error.response) {
+          // Request was made and server responded with an error status code
+          const errorMessage = error.response.data.Error;
+          console.log(errorMessage)
+          Alert.alert(errorMessage)
+        
+        } else if (error.request) {
+          // The request was made but no response was received
+          const errorMessage = error.response.data.error;
+          console.log("response request baby")
+        } else {
+          // Other error occurred
+          const errorMessage = error.response.data.error;
+          console.log("don't know wtf is happening baby")
+        }
+      }
+    };
+    
+    return (
+      <SafeAreaView
+      style={{
+        backgroundColor: Colors.background,
+        flex:1, 
+        }}
+        >
 
-        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <View
+            style={ styles.contentContainer}
+        
+        >
+          <Text
+              style={ styles.title }
+          >
+              Personal Information
+
+          </Text>
           <View
-              style={ styles.contentContainer}
-          
+            style={ styles.infoContainer}
           >
-            <Text
-                style={ styles.title }
-            >
-                Personal Information
 
-            </Text>
-            <View
-              style={ styles.infoContainer}
-            >
-
-                <Image
-                  source = {require('../assets/images/cow.jpg')}
-                  style={styles.Image}
-                />
-                <Text
-                  style={{
-                    fontSize: FontSize.medium,
-                    color: Colors.text,
-                    fontFamily: Font["poppins-regular"],
-                    
-                  }}
-                >
-                  {userData.name}
-                    
-
-                </Text>
-
-            </View>
-
-            <View
-            style = {{
-              flexDirection: 'column',
-              alignItems: 'center',
-              
-
-            }}
-            >
-              <View
-                style={{
-                  paddingTop: Spacing*3,
-                }}
-              
-              >
-              <Text
-                style = {styles.personal_txt}
-              >
-                Name
-              </Text>
-
-              <AppTextInput placeholder="Holy Cow" value={name_chg} onChangeText={setname_chg} inputMode="email-address" />
-
-
-              </View>
-
-              <View>
-              <Text
-                style = {styles.personal_txt}
-              >
-                E-Mail
-              </Text>
-
-              <AppTextInput placeholder="holycow@farm.com" value={email_chg} onChangeText={setemail_chg} inputMode="email-address" />
-
-
-              </View>
-              <View>
-              <Text
-                style = {styles.personal_txt}
-              >
-                Age
-              </Text>
-
-              <AppTextInput placeholder="21" value={age_chg} onChangeText={setage_chg} inputMode="number-pad" />
-
-
-              </View>
-              <View>
-              <Text
-                style = {styles.personal_txt}
-              >
-                Height (cm)
-              </Text>
-
-              <AppTextInput placeholder="180.34 cm" value={height_chg} onChangeText={setheight_chg} inputMode="number-pad" />
-
-
-              </View>
-              <View>
-              <Text
-                style = {styles.personal_txt}
-              >
-                Weight ({userData.weight.unit})
-              </Text>
-
-              <AppTextInput placeholder="68 kg" value={weight_chg} onChangeText={setweight_chg} inputMode="number-pad" />
-              </View>
-            </View>
-            <View
-              style={styles.buttonContainer}
-            
-            >
-              <TouchableOpacity
-            style={styles.backButton
-              // styles.per_info_btn_back
-            }
-          >
-            <ArrowButton onPress={() => navigation.navigate("Profile_")}/>
-          </TouchableOpacity>
-          
-          <TouchableOpacity
-            style={styles.saveButton
-              // styles.per_info_btn_save
-            } onPress={info_chng}
-          >
-            <Text
-              style={styles.saveButtonText}
-            >
-              Save Changes
-            </Text>
-          </TouchableOpacity>
-
-            </View>
+            <Image source = {Profile_avatar}  style={styles.Image}/> 
+             
 
           </View>
-          <View style={{ paddingBottom: Spacing*5 }}/>
-        </ScrollView>
-      </SafeAreaView>
-      );
-    };
+
+          <View
+          style = {{
+            flexDirection: 'column',
+            alignItems: 'center',
+            
+
+          }}
+          >
+            <View
+              style={{
+                paddingTop: Spacing*3,
+              }}
+            
+            >
+            <Text
+              style = {styles.personal_txt}
+            >
+              Name
+            </Text>
+
+            <AppTextInput placeholder="Holy Cow" value={name_chg} onChangeText={setname_chg} inputMode="email-address" />
+
+
+            </View>
+
+            <View>
+            <Text
+              style = {styles.personal_txt}
+            >
+              E-Mail
+            </Text>
+
+            <AppTextInput placeholder="holycow@farm.com" value={email_chg} onChangeText={setemail_chg} inputMode="email-address" />
+
+
+            </View>
+            <View>
+            <Text
+              style = {styles.personal_txt}
+            >
+              Age
+            </Text>
+
+            <AppTextInput placeholder="21" value={age_chg} onChangeText={setage_chg} inputMode="number-pad" />
+
+
+            </View>
+            <View>
+            <Text
+              style = {styles.personal_txt}
+            >
+              Height (cm)
+            </Text>
+
+            <AppTextInput placeholder="180.34 cm" value={height_chg} onChangeText={setheight_chg} inputMode="number-pad" />
+
+
+            </View>
+            <View>
+            <Text
+              style = {styles.personal_txt}
+            >
+              Weight ({userData.weight.unit})
+            </Text>
+
+            <AppTextInput placeholder="68 kg" value={weight_chg} onChangeText={setweight_chg} inputMode="number-pad" />
+            </View>
+          </View>
+          <View
+            style={styles.buttonContainer}
+          
+          >
+            <TouchableOpacity
+          style={styles.backButton
+            // styles.per_info_btn_back
+          }
+        >
+          <ArrowButton onPress={() => navigation.navigate("Profile_")}/>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          style={styles.saveButton
+            // styles.per_info_btn_save
+          } onPress={info_chng}
+        >
+          <Text
+            style={styles.saveButtonText}
+          >
+            Save Changes
+          </Text>
+        </TouchableOpacity>
+
+          </View>
+
+        </View>
+        <View style={{ paddingBottom: Spacing*5 }}/>
+      </ScrollView>
+    </SafeAreaView>
+    );
+  };
 
   const Password_chg = () =>{
 
@@ -427,21 +447,8 @@ import {
             style={styles.infoContainer}
           >
 
-              <Image
-                source = {require('../assets/images/cow.jpg')}
-                style={styles.Image}
-              />
-              <Text
-                style={{
-                  fontSize: FontSize.medium,
-                  color: Colors.text,
-                  fontFamily: Font["poppins-regular"],
-                }}
-              >
-                {userData.name}
-                  
+            <Image source = {Profile_avatar}  style={styles.Image}/> 
 
-              </Text>
 
           </View>
 
@@ -594,21 +601,8 @@ import {
             style={styles.infoContainer}
           >
 
-              <Image
-                source = {require('../assets/images/cow.jpg')}
-                style={styles.Image}
-              />
-              <Text
-                style={{
-                  fontSize: FontSize.medium,
-                  color: Colors.text,
-                  fontFamily: Font["poppins-regular"],
-                }}
-              >
-                {userData.name}
-                  
+            <Image source = {Profile_avatar}  style={styles.Image}/> 
 
-              </Text>
 
           </View>
 
@@ -732,13 +726,15 @@ import {
     alignItems: 'center',
     justifyContent: 'center',
     },
+
     Image:{
-      marginRight:Spacing*2,
-      width: 50,
-      height: 50,
-      borderRadius:30,
+      // marginRight:Spacing*2,
+      width: 100,
+      height: 100,
+      borderRadius:50,
       resizeMode:'contain',
     },
+
     contentContainer: {
       width:'100%',
       paddingHorizontal: Spacing * 2,
@@ -755,9 +751,8 @@ import {
     },
     infoContainer: {
       flexDirection: 'row',
-      // alignSelf: 'flex-start',
       alignItems:'center',
-      alignSelf: 'flex-start'
+      justifyContent:'center'
     },
     buttonContainer: {
       flexDirection: 'row',

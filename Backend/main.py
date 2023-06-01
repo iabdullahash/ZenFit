@@ -239,7 +239,7 @@ def calories_goal_chg():
         if user['email'] == user_email:
             upd_user = user
             if user["goals"]["dailyStepsGoal"] != int(step_chg):
-                upd_cal = calculate_calories_goal(user['weight'],user['height'],user['gender'],step_chg)
+                upd_cal = calculate_calories_goal(user['weight'],step_chg)
 
                 user["goals"]["dailyStepsGoal"] = int(step_chg)
                 user["goals"]["dailyCalorieBurnGoal"] = int(upd_cal)
@@ -250,7 +250,7 @@ def calories_goal_chg():
                 
 
             elif user["goals"]["dailyCalorieBurnGoal"] != int(cal_chg):   
-                upd_steps = calculate_steps_to_burn_calories(user['weight'],user['height'],user['gender'],cal_chg)
+                upd_steps = calculate_steps_to_burn_calories(user['weight'],cal_chg)
 
                 user["goals"]["dailyStepsGoal"] = int(upd_steps)
                 user["goals"]["dailyCalorieBurnGoal"] = int(cal_chg)

@@ -31,6 +31,7 @@
     "react-native-chart-kit": "^6.12.0",
     "react-native-dynamically-selected-picker": "^3.0.2",
     "react-native-eject": "^0.2.0",
+    "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "~2.9.0",
     "react-native-gifted-charts": "^1.2.42",
     "react-native-google-fit": "^0.19.1",
